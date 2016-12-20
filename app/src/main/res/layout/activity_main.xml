@@ -22,7 +22,7 @@
         android:layout_weight="1" />
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:paddingBottom="10dp"
@@ -59,29 +59,18 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="118dp" />
 
-    <Button
-        android:text="take picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="12dp"
-        android:id="@+id/action_photo" />
 
     <Button
         android:text="save to firebase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/action_photo"
+        android:id="@+id/saveObject"
+        android:layout_marginRight="98dp"
+        android:layout_marginEnd="98dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginEnd="30dp"
-        android:id="@+id/saveObject" />
-
+        android:layout_marginBottom="22dp" />
 
 
 </RelativeLayout>
