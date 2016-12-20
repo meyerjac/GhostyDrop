@@ -7,6 +7,8 @@ public class Pictures {
     String latitude;
     String longitude;
 
+    public Pictures(){};
+
     public Pictures(String comment, String imageUrl, String latitude, String longitude) {
         this.comment = comment;
         this.imageUrl = imageUrl;
