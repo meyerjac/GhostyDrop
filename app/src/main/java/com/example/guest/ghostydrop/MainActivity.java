@@ -36,11 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
 
         mSaveObject.setOnClickListener(this);
-
-
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
-
-
     }
 
     @Override
