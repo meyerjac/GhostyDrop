@@ -166,7 +166,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 return;
             }
 
-            if (CommentLine == "") {
+            if (CommentLine == null) {
                 Toast.makeText(PictureActivity.this, "Please add a comment to this picture, Thanks Ghoster", Toast.LENGTH_LONG).show();
                 return;
             }
