@@ -13,17 +13,4 @@
 
 
 
-
-
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-        android:layout_below="@+id/commentText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="165dp"
-        android:id="@+id/currentPic" />
-
 </RelativeLayout>

@@ -27,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.example.guest.ghostydrop.R.id.iconImage;
 import static com.example.guest.ghostydrop.R.id.imageView;
 
 public class PictureActivity extends AppCompatActivity implements  View.OnClickListener {
@@ -39,14 +40,16 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
     private String imageEncoded;
     private String CommentLine;
 
-    @Bind(R.id.action_photo)
-    Button mAction_Photo;
     @Bind(imageView)
     ImageView mImageView;
+    @Bind(iconImage)
+    ImageView mIcon;
     @Bind(R.id.commentText)
     TextView mCommentText;
     @Bind(R.id.ghostDrop)
     Button mGhostDrop;
+    @Bind(R.id.action_photo)
+    Button mAction_Photo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,9 +146,11 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
             View image = findViewById(R.id.imageView);
             View commentLine = findViewById(R.id.commentText);
             View save = findViewById(R.id.ghostDrop);
+            View icon = findViewById(R.id.iconImage);
             image.setVisibility(View.VISIBLE);
             commentLine.setVisibility(View.VISIBLE);
             save.setVisibility(View.VISIBLE);
+            icon.setVisibility(View.INVISIBLE);
         }
     }
 
