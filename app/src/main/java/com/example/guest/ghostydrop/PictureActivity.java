@@ -156,10 +156,18 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v) {git add .
+
         if (v == mGhostDrop) {
+            CommentLine = mCommentText.getText().toString();
+            Log.d("comment", CommentLine);
             if ((Longitude == "") || (Latitude == "")) {
                 Toast.makeText(PictureActivity.this, "GPS not activated, please wait 3 seconds before trying again", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (CommentLine == "") {
+                Toast.makeText(PictureActivity.this, "Please add a comment to this picture, Thanks Ghoster", Toast.LENGTH_LONG).show();
                 return;
             }
             if ((Longitude != "") || (Latitude != "")) {
