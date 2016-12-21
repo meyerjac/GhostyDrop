@@ -3,7 +3,6 @@ package com.example.guest.ghostydrop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -11,10 +10,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-//    @Bind(R.id.currentPic)
-//    TextView mCurrentPictureImageView;
-
-
     private DatabaseReference mDatabaseRef;
     private Pictures pictures;
 
@@ -31,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         String longi = intent.getStringExtra("longi");
         String lat = intent.getStringExtra("lati");
         String com = intent.getStringExtra("com");
-        Toast.makeText(MainActivity.this, lat, Toast.LENGTH_LONG).show();
 
         String comment = com;
         String pictureURL = bitmap;
