@@ -44,11 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mSaveObject) {
             Intent intent = getIntent();
             String bitmap = intent.getStringExtra("bitmap");
+            String longi = intent.getStringExtra("longi");
+            String lat = intent.getStringExtra("lati");
+
 
             String comment = mCommentText.getText().toString();
             String pictureURL = bitmap;
-            String latitude = mLatitudeText.getText().toString();
-            String longitude = mLongitudeText.getText().toString();
+            String latitude = lat;
+            String longitude = longi;
 
 
 

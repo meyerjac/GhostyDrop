@@ -28,16 +28,15 @@ import butterknife.ButterKnife;
 public class PictureActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 111;
-
     private LocationManager locationManager;
     private LocationListener listener;
+    private String Latitude;
+    private String Longitude;
 
     @Bind(R.id.action_photo)
     Button mAction_Photo;
     @Bind(R.id.imageView)
     ImageView mImageView;
-
-
     @Bind(R.id.button)
     Button b;
 
@@ -46,16 +45,17 @@ public class PictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
         ButterKnife.bind(this);
-
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
 
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-//               location.getLongitude()
-//                location.getLatitude());
-                String location2 = String.valueOf(location.getLatitude());
-                Log.d("onLocationChanged: ", location2);
+
+                Latitude = String.valueOf(location.getLatitude());
+                Longitude = String.valueOf(location.getLongitude());
+                Log.d("lat", Latitude );
+                Log.d("long", Longitude);
             }
 
             @Override
@@ -75,6 +75,7 @@ public class PictureActivity extends AppCompatActivity {
                 startActivity(i);
             }
         };
+
         configure_button();
     }
 
@@ -88,12 +89,13 @@ public class PictureActivity extends AppCompatActivity {
                 break;
         }
     }
-    void configure_button() {
+
+    void configure_button(){
         // first check for permissions
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.INTERNET}
-                        , 10);
+                        ,10);
             }
             return;
         }
@@ -101,11 +103,11 @@ public class PictureActivity extends AppCompatActivity {
         mAction_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v == mAction_Photo) {
-                    //noinspection MissingPermission
-                    locationManager.requestLocationUpdates("gps", 2000, 0, listener);
-                    onLaunchCamera();
-                }
+                //noinspection MissingPermission
+                locationManager.requestLocationUpdates("gps", 0, 0, listener);
+                onLaunchCamera();
+
+
             }
         });
     }
@@ -135,6 +137,8 @@ public class PictureActivity extends AppCompatActivity {
 
         Intent intent = new Intent(PictureActivity.this, MainActivity.class);
         intent.putExtra("bitmap", imageEncoded);
+        intent.putExtra("longi", Longitude);
+        intent.putExtra("lati", Latitude);
         startActivity(intent);
 
     }
