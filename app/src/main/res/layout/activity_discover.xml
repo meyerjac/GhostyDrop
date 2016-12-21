@@ -12,14 +12,23 @@
     tools:context="com.example.guest.ghostydrop.DiscoverActivity">
 
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/discoverListView"
+        android:layout_below="@+id/discoverTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <TextView
         android:text="Discover Photos near you"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/discoverTextView"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:id="@+id/discoverTextView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
