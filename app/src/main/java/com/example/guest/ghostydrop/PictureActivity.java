@@ -19,24 +19,33 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PictureActivity extends AppCompatActivity {
+import static com.example.guest.ghostydrop.R.id.imageView;
+
+public class PictureActivity extends AppCompatActivity implements  View.OnClickListener{
 
     private static final int REQUEST_IMAGE_CAPTURE = 111;
     private LocationManager locationManager;
     private LocationListener listener;
     private String Latitude;
     private String Longitude;
+    private String imageEncoded;
+    private String CommentLine;
 
     @Bind(R.id.action_photo)
     Button mAction_Photo;
-    @Bind(R.id.imageView)
+    @Bind(imageView)
     ImageView mImageView;
+    @Bind(R.id.commentText)
+    TextView mCommentText;
+    @Bind(R.id.ghostDrop)
+    Button mGhostDrop;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +53,6 @@ public class PictureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture);
         ButterKnife.bind(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
 
         listener = new LocationListener() {
             @Override
@@ -58,12 +66,10 @@ public class PictureActivity extends AppCompatActivity {
 
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
-
             }
 
             @Override
             public void onProviderEnabled(String s) {
-
             }
 
             @Override
@@ -75,6 +81,7 @@ public class PictureActivity extends AppCompatActivity {
         };
 
         configure_button();
+        mGhostDrop.setOnClickListener(this);
     }
 
     @Override
@@ -90,9 +97,17 @@ public class PictureActivity extends AppCompatActivity {
 
     void configure_button(){
         // first check for permissions
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (
+//                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission
+                (this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.INTERNET}
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION,
+                        android.Manifest.permission.INTERNET}
+
                         ,10);
             }
             return;
@@ -101,16 +116,13 @@ public class PictureActivity extends AppCompatActivity {
         mAction_Photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //noinspection MissingPermission
-                locationManager.requestLocationUpdates("gps", 0, 0, listener);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 10, listener);
                 onLaunchCamera();
-
-
             }
         });
     }
-
-
 
     public void onLaunchCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -124,20 +136,33 @@ public class PictureActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
             encodeBitmap(imageBitmap);
+            View image = findViewById(R.id.imageView);
+            View commentLine = findViewById(R.id.commentText);
+            View save = findViewById(R.id.ghostDrop);
+            image.setVisibility(View.VISIBLE);
+            commentLine.setVisibility(View.VISIBLE);
+            save.setVisibility(View.VISIBLE);
         }
     }
 
     private void encodeBitmap(Bitmap imageBitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64. DEFAULT);
-        Log.d("bitmap", imageEncoded);
+        imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64. DEFAULT);
+    }
 
-        Intent intent = new Intent(PictureActivity.this, MainActivity.class);
-        intent.putExtra("bitmap", imageEncoded);
-        intent.putExtra("longi", Longitude);
-        intent.putExtra("lati", Latitude);
-        startActivity(intent);
+    @Override
+    public void onClick(View v) {
+        if (v ==  mGhostDrop) {
+            CommentLine = mCommentText.getText().toString();
 
+            Intent intent = new Intent(PictureActivity.this, MainActivity.class);
+            intent.putExtra("bitmap", imageEncoded);
+            intent.putExtra("longi", Longitude);
+            intent.putExtra("lati", Latitude);
+            intent.putExtra("com", CommentLine);
+
+            startActivity(intent);
+        }
     }
 }

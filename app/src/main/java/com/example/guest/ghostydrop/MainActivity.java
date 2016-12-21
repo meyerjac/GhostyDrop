@@ -1,28 +1,16 @@
 package com.example.guest.ghostydrop;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.IOException;
-
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.saveObject)
-    Button mSaveObject;
-    @Bind(R.id.commentText)
-    TextView mCommentText;
+public class MainActivity extends AppCompatActivity {
 //    @Bind(R.id.currentPic)
 //    TextView mCurrentPictureImageView;
 
@@ -37,9 +25,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mSaveObject.setOnClickListener(this);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
+        Intent intent = getIntent();
+        String bitmap = intent.getStringExtra("bitmap");
+        String longi = intent.getStringExtra("longi");
+        String lat = intent.getStringExtra("lati");
+        String com = intent.getStringExtra("com");
+        Toast.makeText(MainActivity.this, lat, Toast.LENGTH_LONG).show();
+
+        String comment = com;
+        String pictureURL = bitmap;
+        String latitude = lat;
+        String longitude = longi;
+
+        pictures = new Pictures(comment, pictureURL, latitude, longitude);
+
+        mDatabaseRef.push().setValue(pictures);
     }
+}
 
 //        if (pictures.getImageUrl().contains("http")) {
 //            try {
@@ -51,35 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 //    }
 
-    public static Bitmap decodeFromFirebaseBase64(String image) throws  IOException {
-        byte[] decodeByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodeByteArray, 0, decodeByteArray.length);
-    }
+//    public static Bitmap decodeFromFirebaseBase64(String image) throws  IOException {
+//        byte[] decodeByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
+//        return BitmapFactory.decodeByteArray(decodeByteArray, 0, decodeByteArray.length);
+//    }
 
-    @Override
-    public void onClick(View v) {
-        if (v == mSaveObject) {
-            Intent intent = getIntent();
-            String bitmap = intent.getStringExtra("bitmap");
-            String longi = intent.getStringExtra("longi");
-            String lat = intent.getStringExtra("lati");
-
-
-            String comment = mCommentText.getText().toString();
-            String pictureURL = bitmap;
-            String latitude = lat;
-            String longitude = longi;
-
-
-
-            pictures = new Pictures(comment, pictureURL, latitude, longitude);
-
-            mDatabaseRef.push().setValue(pictures);
-
-
-        }
-    }
-}
 
 
 

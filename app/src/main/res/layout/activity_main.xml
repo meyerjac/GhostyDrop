@@ -12,28 +12,10 @@
     tools:context="com.example.guest.ghostydrop.MainActivity">
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:id="@+id/commentText"
-        android:hint="comment"
-        android:layout_weight="1" />
 
 
-    <Button
-        android:text="save to firebase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/saveObject"
-        android:layout_marginRight="98dp"
-        android:layout_marginEnd="98dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="22dp" />
+
+
 
     <ImageView
         android:layout_width="wrap_content"
