@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.aboutButton)
     ImageView mAboutButton;
     @Bind(R.id.discoverButton)
-    TextView mDiscoverButton;
+    ImageView mDiscoverButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pictures = new Pictures(comment, pictureURL, latitude, longitude);
 
         mDatabaseRef.push().setValue(pictures);
+        mAboutButton.setOnClickListener(this);
+        mDiscoverButton.setOnClickListener(this);
+        mCreateGhostButton.setOnClickListener(this);
     }
 
     @Override
@@ -52,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mCreateGhostButton) {
         Intent intent = new Intent(MainActivity.this, PictureActivity.class);
             startActivity(intent);
-        } else if (v == mAboutButton) {
+        } if (v == mAboutButton) {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
-        } else if (v == mDiscoverButton) {
+        } if (v == mDiscoverButton) {
             Intent intent = new Intent(MainActivity.this,   DiscoverActivity.class);
           startActivity(intent);
         }

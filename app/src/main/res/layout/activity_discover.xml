@@ -12,5 +12,14 @@
     tools:context="com.example.guest.ghostydrop.DiscoverActivity">
 
 
-
+    <TextView
+        android:text="Discover Photos near you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:id="@+id/discoverTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp" />
 </RelativeLayout>
