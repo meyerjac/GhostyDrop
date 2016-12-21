@@ -12,6 +12,42 @@
     android:background="@color/colorPrimary"
     tools:context="com.example.guest.ghostydrop.PictureActivity">
 
+    <Button
+        android:text="Submit Photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:alpha="0.8"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/ghostDrop"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:alpha="0.8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ghostbusters"
+        android:id="@+id/iconImage"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+        android:visibility="invisible"
+        android:id="@+id/imageView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,28 +57,11 @@
         android:id="@+id/commentText"
         android:hint="comment"
         android:layout_weight="1"
-        android:visibility="invisible"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-        android:layout_below="@+id/action_photo"
         android:visibility="invisible"
-        android:id="@+id/imageView" />
 
-    <Button
-        android:text="save to firebase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ghostDrop"
-        android:layout_marginRight="98dp"
-        android:layout_marginEnd="98dp"
-        android:visibility="invisible"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="22dp" />
+        android:layout_above="@+id/ghostDrop"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Create Ghost"
@@ -55,19 +74,9 @@
         android:paddingLeft="10dp"
         android:background="@color/colorAccent"
         android:id="@+id/action_photo"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:alpha="0.8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ghostbusters"
-        android:id="@+id/iconImage"
-        android:visibility="visible"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/iconImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp" />
 
 
 </RelativeLayout>

@@ -163,7 +163,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == mGhostDrop) {
-            Toast.makeText(PictureActivity.this, CommentLine, Toast.LENGTH_LONG).show();
             CommentLine = mCommentText.getText().toString();
             Log.d("comment", CommentLine);
             if ((Longitude == "") || (Latitude == "")) {

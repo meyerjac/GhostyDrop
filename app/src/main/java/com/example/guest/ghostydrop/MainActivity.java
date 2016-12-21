@@ -3,15 +3,25 @@ package com.example.guest.ghostydrop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference mDatabaseRef;
     private Pictures pictures;
+    @Bind(R.id.createGhostButton)
+    ImageView mCreateGhostButton;
+    @Bind(R.id.aboutButton)
+    ImageView mAboutButton;
+    @Bind(R.id.discoverButton)
+    TextView mDiscoverButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
         pictures = new Pictures(comment, pictureURL, latitude, longitude);
 
         mDatabaseRef.push().setValue(pictures);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mCreateGhostButton) {
+        Intent intent = new Intent(MainActivity.this, PictureActivity.class);
+            startActivity(intent);
+        } else if (v == mAboutButton) {
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+        } else if (v == mDiscoverButton) {
+            Intent intent = new Intent(MainActivity.this,   DiscoverActivity.class);
+          startActivity(intent);
+        }
     }
 }
 
