@@ -1,14 +1,19 @@
 package com.example.guest.ghostydrop;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,12 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button mSaveObject;
     @Bind(R.id.commentText)
     TextView mCommentText;
-    @Bind(R.id.imageUrlText)
-    TextView mImageUrlText;
-    @Bind(R.id.latitudeText)
-    TextView mLatitudeText;
-    @Bind(R.id.longitudeText)
-    TextView mLongitudeText;
+//    @Bind(R.id.currentPic)
+//    TextView mCurrentPictureImageView;
+
 
     private DatabaseReference mDatabaseRef;
     private Pictures pictures;
@@ -37,6 +39,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mSaveObject.setOnClickListener(this);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
+    }
+
+//        if (pictures.getImageUrl().contains("http")) {
+//            try {
+//                Bitmap imageBitmap = decodeFromFirebaseBase64(pictures.getImageUrl());
+//                mCurrentPictureImageView.setImageBitmap(imageBitmap);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+    public static Bitmap decodeFromFirebaseBase64(String image) throws  IOException {
+        byte[] decodeByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodeByteArray, 0, decodeByteArray.length);
     }
 
     @Override

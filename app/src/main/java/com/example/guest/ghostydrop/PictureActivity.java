@@ -37,8 +37,6 @@ public class PictureActivity extends AppCompatActivity {
     Button mAction_Photo;
     @Bind(R.id.imageView)
     ImageView mImageView;
-    @Bind(R.id.button)
-    Button b;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
