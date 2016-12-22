@@ -1,5 +1,6 @@
 package com.example.guest.ghostydrop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class FindPictureListActivity extends AppCompatActivity {
+    private String Latitude;
+    private String Longitude;
     private DatabaseReference mDatabaseRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
 
@@ -23,9 +26,13 @@ public class FindPictureListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_discover);
         ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        Longitude = intent.getStringExtra("long");
+        Latitude = intent.getStringExtra("la");
+
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
         setUpFirebaseAdapter();

@@ -15,12 +15,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference mDatabaseRef;
     private Picture pictures;
+    private String Latitude;
+    private String Longitude;
     @Bind(R.id.createGhostButton)
     ImageView mCreateGhostButton;
     @Bind(R.id.aboutButton)
     ImageView mAboutButton;
     @Bind(R.id.discoverButton)
     ImageView mDiscoverButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +36,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
         Intent intent = getIntent();
         String bitmap = intent.getStringExtra("bitmap");
-        String longi = intent.getStringExtra("longi");
-        String lat = intent.getStringExtra("lati");
+        Longitude = intent.getStringExtra("longi");
+        Latitude = intent.getStringExtra("lati");
         String com = intent.getStringExtra("com");
 
         String comment = com;
         String pictureURL = bitmap;
-        String latitude = lat;
-        String longitude = longi;
+        String latitude = Latitude;
+        String longitude = Longitude;
 
         pictures = new Picture(comment, pictureURL, latitude, longitude);
 
@@ -59,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } if (v == mDiscoverButton) {
             Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
+
+            intent.putExtra("long", Longitude);
+            intent.putExtra("lat", Latitude);
           startActivity(intent);
         }
     }
