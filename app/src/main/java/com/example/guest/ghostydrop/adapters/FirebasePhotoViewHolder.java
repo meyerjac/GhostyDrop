@@ -42,6 +42,7 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         mContext = itemView.getContext();
         itemView.setOnClickListener(this);
     }
+
     public void bindPicture(Picture picture) {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
@@ -85,9 +86,9 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
 
         float distanceInMeters = loc1.distanceTo(loc2);
         double distanceInMiles=distanceInMeters * 0.000621371;
-        int roundedMiles = (int) distanceInMiles;
+        double roundedMiles = (double)Math.round(distanceInMiles * 10d) / 10d;
 
-                DistanceText.setText(roundedMiles + " miles away");
+        DistanceText.setText(roundedMiles + " miles away");
     }
 
     public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
