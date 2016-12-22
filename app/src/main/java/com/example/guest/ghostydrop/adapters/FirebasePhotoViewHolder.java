@@ -3,6 +3,7 @@ package com.example.guest.ghostydrop.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.View;
@@ -58,12 +59,28 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         }
 
 
-        PhotoComment.setText(
+        PhotoComment.setText(picture.getComment());
+        double lat1 = Double.parseDouble(picture.getLatitude());
+        double lat2 = 45.673;
 
-                picture.getComment()
+        double lon1 = Double.parseDouble(picture.getLongitude());
+        double lon2 = -125.000;
 
-        );
-        DistanceText.setText(picture.getLatitude() + "hello" + picture.getLongitude());
+        Location loc1 = new Location("");
+        loc1.setLatitude(lat1);
+        loc1.setLongitude(lon1);
+
+        Location loc2 = new Location("");
+        loc2.setLatitude(lat2);
+        loc2.setLongitude(lon2);
+
+        float distanceInMeters = loc1.distanceTo(loc2);
+
+
+        DistanceText.setText("Only " + distanceInMeters + "meters away");
+
+
+
     }
 
     public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {

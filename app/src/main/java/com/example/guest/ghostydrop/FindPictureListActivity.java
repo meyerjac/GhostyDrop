@@ -34,6 +34,8 @@ public class FindPictureListActivity extends AppCompatActivity {
         Latitude = intent.getStringExtra("la");
 
 
+
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
         setUpFirebaseAdapter();
     }

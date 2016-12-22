@@ -67,8 +67,11 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
 
                 Latitude = String.valueOf(location.getLatitude());
                 Longitude = String.valueOf(location.getLongitude());
+
                 Log.d("lat", Latitude);
                 Log.d("long", Longitude);
+                Toast.makeText(PictureActivity.this, Latitude, Toast.LENGTH_LONG).show();
+                Toast.makeText(PictureActivity.this, Longitude, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -176,7 +179,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
             }
             if ((Longitude != "") || (Latitude != "")) {
 //                Toast.makeText(PictureActivity.this, "Successfully dropped Photo!", Toast.LENGTH_LONG).show();
-                Toast.makeText(PictureActivity.this, Latitude, Toast.LENGTH_LONG).show();
+
                 CommentLine = mCommentText.getText().toString();
 
                 Intent intent = new Intent(PictureActivity.this, MainActivity.class);
