@@ -16,6 +16,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.PhotoViewHolder> {
+    @Bind(R.id.photoCommentTextView)
+    TextView m1;
+    @Bind(R.id.distanceTextView)
+    TextView m2;
+
     private ArrayList<Picture> mPictures = new ArrayList<>();
     private Context mContext;
 
@@ -27,6 +32,10 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
     @Override
     public PhotoListAdapter.PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.photo_list_item, parent, false);
+
+
+
+
         PhotoViewHolder viewHolder = new PhotoViewHolder(view);
         return viewHolder;
     }
@@ -56,6 +65,10 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
         public void bindPicture(Picture picture) {
             mPhotoCommentView.setText(picture.getComment());
             mDistanceTextView.setText(picture.getLatitude() + "hello" + picture.getLongitude());
+
+//            String fontPath = "fonts/Roboto-Regular.ttf";
+//            Typeface RobotoFont = Typeface.createFromAsset(getAssets(), fontPath);
+//            m1.setTypeface(RobotoFont);
 
         }
 

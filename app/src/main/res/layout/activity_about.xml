@@ -11,12 +11,6 @@
     android:background="@color/colorPrimary"
     tools:context="com.example.guest.ghostydrop.AboutActivity">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbarSize="12dip"
-        >
-
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
@@ -39,7 +33,7 @@
                 android:lineSpacingExtra="3sp"
                 android:layout_marginTop="10dp"
                 android:text="• Ghosty Drop is a gamified social media, allowing you to 'drop photos' all over the natural world that other people can find!"
-                android:textSize="25dp"
+                android:textSize="22dp"
                 android:textColor="@color/colorPrimaryText"
                 android:layout_below="@+id/body_text3"
                 android:layout_marginLeft="20dp" />
@@ -51,7 +45,7 @@
                 android:layout_marginTop="20dp"
                 android:textColor="@color/colorPrimaryText"
                 android:text="• Take a picture, add a comment, and your facebook friends will be notified when you are close to a picture they dropped"
-                android:textSize="25dp"
+                android:textSize="22dp"
                 android:layout_below="@+id/bullet1"
                 android:layout_marginLeft="20dp" />
             <TextView
@@ -62,12 +56,9 @@
                 android:layout_marginTop="20dp"
                 android:textColor="@color/colorPrimaryText"
                 android:text="• The discover feature will find pictures that other people have dropped, have fun!!!"
-                android:textSize="25dp"
+                android:textSize="22dp"
                 android:layout_below="@+id/bullet2"
                 android:layout_marginLeft="20dp" />
 
         </RelativeLayout>
-
-    </ScrollView>
-
 </RelativeLayout>

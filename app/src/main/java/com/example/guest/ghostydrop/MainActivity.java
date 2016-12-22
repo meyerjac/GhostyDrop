@@ -1,10 +1,12 @@
 package com.example.guest.ghostydrop;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView mAboutButton;
     @Bind(R.id.discoverButton)
     ImageView mDiscoverButton;
+    @Bind(R.id.welcomeText)
+    TextView mWelcomeText;
 
 
 
@@ -32,6 +36,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+
+        String fontPath = "fonts/Roboto-Regular.ttf";
+        Typeface RobotoFont = Typeface.createFromAsset(getAssets(), fontPath);
+        mWelcomeText.setTypeface(RobotoFont);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
         Intent intent = getIntent();
