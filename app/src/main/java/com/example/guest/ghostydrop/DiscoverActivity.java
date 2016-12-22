@@ -1,27 +1,25 @@
 package com.example.guest.ghostydrop;
 
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import com.example.guest.ghostydrop.adapters.PhotoListAdapter;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class DiscoverActivity extends AppCompatActivity {
-    @Bind(R.id.discoverListView)
-    ListView mDiscoverListView;
+    public static final String TAG = DiscoverActivity.class.getSimpleName();
 
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
 
-    private String[] photoObjects = new String[] {"Mi Mero Mole", "Mother's Bistro",
-            "Life of Pie", "Screen Door", "Luc Lac", "Sweet Basil",
-            "Slappy Cakes", "Equinox", "Miss Delta's", "Andina",
-            "Lardo", "Portland City Grill", "Fat Head's Brewery",
-            "Chipotle", "Subway"};
+    private PhotoListAdapter mAdapter;
+    public ArrayList<Picture> mPictures = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +27,22 @@ public class DiscoverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_discover);
         ButterKnife.bind(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, photoObjects);
-        mDiscoverListView.setAdapter(adapter);
+        String location = "hello";
+    }
 
-        mDiscoverListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void getPictures(String location) {
+
+        DiscoverActivity.this.runOnUiThread(new Runnable() {
+
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String Ghost = ((TextView)view).getText().toString();
-                Toast.makeText(DiscoverActivity.this, Ghost, Toast.LENGTH_SHORT).show();
+            public void run() {
+                mAdapter = new PhotoListAdapter(getApplicationContext(), mPictures);
+                mRecyclerView.setAdapter(mAdapter);
+                RecyclerView.LayoutManager layoutManager =
+                        new LinearLayoutManager(DiscoverActivity.this);
+                mRecyclerView.setLayoutManager(layoutManager);
+                mRecyclerView.setHasFixedSize(true);
             }
         });
-
     }
 }

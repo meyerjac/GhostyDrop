@@ -1,15 +1,15 @@
 package com.example.guest.ghostydrop;
 
 
-public class Pictures {
+public class Picture {
     String comment;
     String imageUrl;
     String latitude;
     String longitude;
 
-    public Pictures(){};
+    public Picture(){};
 
-    public Pictures(String comment, String imageUrl, String latitude, String longitude) {
+    public Picture(String comment, String imageUrl, String latitude, String longitude) {
         this.comment = comment;
         this.imageUrl = imageUrl;
         this.latitude = latitude;

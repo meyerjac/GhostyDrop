@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference mDatabaseRef;
-    private Pictures pictures;
+    private Picture pictures;
     @Bind(R.id.createGhostButton)
     ImageView mCreateGhostButton;
     @Bind(R.id.aboutButton)
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String latitude = lat;
         String longitude = longi;
 
-        pictures = new Pictures(comment, pictureURL, latitude, longitude);
+        pictures = new Picture(comment, pictureURL, latitude, longitude);
 
         mDatabaseRef.push().setValue(pictures);
         mAboutButton.setOnClickListener(this);
