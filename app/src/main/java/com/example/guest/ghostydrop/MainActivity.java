@@ -58,26 +58,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
         } if (v == mDiscoverButton) {
-            Intent intent = new Intent(MainActivity.this,   DiscoverActivity.class);
+            Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
           startActivity(intent);
         }
     }
 }
-
-//        if (pictures.getImageUrl().contains("http")) {
-//            try {
-//                Bitmap imageBitmap = decodeFromFirebaseBase64(pictures.getImageUrl());
-//                mCurrentPictureImageView.setImageBitmap(imageBitmap);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
-//    public static Bitmap decodeFromFirebaseBase64(String image) throws  IOException {
-//        byte[] decodeByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
-//        return BitmapFactory.decodeByteArray(decodeByteArray, 0, decodeByteArray.length);
-//    }
 
 
 

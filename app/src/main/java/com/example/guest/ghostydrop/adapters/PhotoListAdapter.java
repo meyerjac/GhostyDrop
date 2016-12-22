@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Picture;
@@ -43,7 +42,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
     }
 
     public class PhotoViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.photoImageView) ImageView mPhotoImageView;
+//        @Bind(R.id.photoImageView) ImageView mPhotoImageView;
         @Bind(R.id.photoCommentTextView) TextView mPhotoCommentView;
         @Bind(R.id.distanceTextView) TextView mDistanceTextView;
         private Context mContext;
@@ -56,8 +55,8 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
 
         public void bindPicture(Picture picture) {
             mPhotoCommentView.setText(picture.getComment());
-            mDistanceTextView.setText(picture.getLatitude());
-//            mPhotoImageView.setText(picture.getImageUrl());
+            mDistanceTextView.setText(picture.getLatitude() + "hello" + picture.getLongitude());
+
         }
 
     }

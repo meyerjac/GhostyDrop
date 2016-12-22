@@ -1,6 +1,5 @@
 package com.example.guest.ghostydrop;
 
-import android.graphics.Picture;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +16,6 @@ public class DiscoverActivity extends AppCompatActivity {
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
-
     private PhotoListAdapter mAdapter;
     public ArrayList<Picture> mPictures = new ArrayList<>();
 

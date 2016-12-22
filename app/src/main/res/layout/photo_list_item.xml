@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:id="@+id/photoImageView"
-        android:src="@mipmap/arrows"
-        android:scaleType="centerCrop"/>
+    <!--<ImageView-->
+        <!--android:layout_width="130dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:id="@+id/photoImageView"-->
+        <!--android:src="@mipmap/arrows"-->
+        <!--android:scaleType="centerCrop"/>-->
 
     <LinearLayout
         android:orientation="vertical"
@@ -29,19 +29,19 @@
             android:textColor="@color/colorAccent"/>
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="distance away"
+            android:id="@+id/distanceTextView"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorAccent"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="distance away"
-                android:id="@+id/distanceTextView"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/colorAccent"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
