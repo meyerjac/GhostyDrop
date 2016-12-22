@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,8 +28,8 @@ import java.util.ArrayList;
 
 
 public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    private static final int MAX_WIDTH = 200;
-    private static final int MAX_HEIGHT = 200;
+    private static final int MAX_WIDTH = 400;
+    private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
     private String mLat;
     private String mLong;
@@ -52,6 +53,15 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         ImageView  Image= (ImageView) mView.findViewById(R.id. photoImageView);
+
+
+        Typeface typeface = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
+                "fonts/Roboto-Regular.ttf");
+        Typeface typeface2 = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
+                "fonts/Walkway_Oblique_Bold.ttf");
+
+        PhotoComment.setTypeface(typeface);
+        DistanceText.setTypeface(typeface2);
 
 
         if (!picture.getImageUrl().contains("http")) {

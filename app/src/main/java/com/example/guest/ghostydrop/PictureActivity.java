@@ -17,7 +17,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -73,11 +72,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
 
                 Latitude = String.valueOf(location.getLatitude());
                 Longitude = String.valueOf(location.getLongitude());
-
-                Log.d("lat", Latitude);
-                Log.d("long", Longitude);
-                Toast.makeText(PictureActivity.this, Latitude, Toast.LENGTH_LONG).show();
-                Toast.makeText(PictureActivity.this, Longitude, Toast.LENGTH_LONG).show();
                 addToSharedPreferences(Latitude, Longitude);
 
             }
@@ -180,7 +174,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
     public void onClick(View v) {
         if (v == mGhostDrop) {
             CommentLine = mCommentText.getText().toString();
-            Log.d("comment", CommentLine);
             if ((Longitude == "") || (Latitude == "")) {
                 Toast.makeText(PictureActivity.this, "GPS not activated, please wait 3 seconds before trying again", Toast.LENGTH_LONG).show();
                 return;
