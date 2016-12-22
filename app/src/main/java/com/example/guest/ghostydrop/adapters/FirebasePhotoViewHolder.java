@@ -1,9 +1,11 @@
 package com.example.guest.ghostydrop.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.View;
@@ -27,6 +29,9 @@ import java.util.ArrayList;
 public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+    private SharedPreferences mSharedPreferences;
+    private String mLat;
+    private String mLong;
 
     View mView;
     Context mContext;
@@ -38,6 +43,11 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         itemView.setOnClickListener(this);
     }
     public void bindPicture(Picture picture) {
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
+        mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
+
+
         TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         ImageView  Image= (ImageView) mView.findViewById(R.id. photoImageView);
@@ -58,13 +68,12 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
                     .into(Image);
         }
 
-
         PhotoComment.setText(picture.getComment());
         double lat1 = Double.parseDouble(picture.getLatitude());
-        double lat2 = 45.673;
+        double lat2 = Double.parseDouble(mLat);
 
         double lon1 = Double.parseDouble(picture.getLongitude());
-        double lon2 = -125.000;
+        double lon2 = Double.parseDouble(mLong);
 
         Location loc1 = new Location("");
         loc1.setLatitude(lat1);
@@ -105,13 +114,6 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         });
     }
 }
-
-//if (((Integer.ParseInt(picture.getLatitude())) - Latitude) isbetween .001 & -.001 )
-//        && (((Integer.ParseInt(picture.getLongitude())) - Longitude) is betwwen .001 & -.001)
-
-//    getDistanceInMiles(String longways, String latways) {
-//
-//    }
 
 
 

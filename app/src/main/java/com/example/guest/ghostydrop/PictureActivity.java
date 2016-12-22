@@ -1,6 +1,7 @@
 package com.example.guest.ghostydrop;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -8,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -39,6 +41,8 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
     private String Longitude;
     private String imageEncoded;
     private String CommentLine;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     @Bind(imageView)
     ImageView mImageView;
@@ -60,6 +64,8 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
 
         Latitude = "";
         Longitude = "";
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
 
         listener = new LocationListener() {
             @Override
@@ -72,6 +78,8 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 Log.d("long", Longitude);
                 Toast.makeText(PictureActivity.this, Latitude, Toast.LENGTH_LONG).show();
                 Toast.makeText(PictureActivity.this, Longitude, Toast.LENGTH_LONG).show();
+                addToSharedPreferences(Latitude, Longitude);
+
             }
 
             @Override
@@ -92,6 +100,11 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
 
         configure_button();
         mGhostDrop.setOnClickListener(this);
+    }
+
+    private void addToSharedPreferences(String Latitude, String Longitude) {
+        mEditor.putString(Constants.LONGITUDE, Longitude).apply();
+        mEditor.putString(Constants.LATITUDE, Latitude).apply();
     }
 
     @Override
