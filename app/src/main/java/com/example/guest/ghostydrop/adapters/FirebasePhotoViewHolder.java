@@ -57,7 +57,12 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
                     .into(Image);
         }
 
-        PhotoComment.setText(picture.getComment());
+
+        PhotoComment.setText(
+
+                picture.getComment()
+
+        );
         DistanceText.setText(picture.getLatitude() + "hello" + picture.getLongitude());
     }
 
@@ -85,6 +90,13 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         });
     }
 }
+
+//if (((Integer.ParseInt(picture.getLatitude())) - Latitude) isbetween .001 & -.001 )
+//        && (((Integer.ParseInt(picture.getLongitude())) - Longitude) is betwwen .001 & -.001)
+
+//    getDistanceInMiles(String longways, String latways) {
+//
+//    }
 
 
 

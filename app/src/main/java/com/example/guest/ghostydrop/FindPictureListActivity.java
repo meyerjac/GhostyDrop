@@ -15,8 +15,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class FindPictureListActivity extends AppCompatActivity {
-    private String Latitude;
-    private String Longitude;
+    public String Latitude;
+    public String Longitude;
     private DatabaseReference mDatabaseRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
 
@@ -46,6 +46,7 @@ public class FindPictureListActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(FirebasePhotoViewHolder viewHolder,
                                               Picture model, int position) {
+
                 viewHolder.bindPicture(model);
             }
         };

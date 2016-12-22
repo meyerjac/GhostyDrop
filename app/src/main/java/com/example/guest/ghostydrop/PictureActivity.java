@@ -105,8 +105,8 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
     void configure_button() {
         // first check for permissions
         if (
-//                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission
                         (this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -125,7 +125,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
             public void onClick(View v) {
 
                 //noinspection MissingPermission
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 10, listener);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
                 onLaunchCamera();
             }
         });
@@ -175,7 +175,8 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 return;
             }
             if ((Longitude != "") || (Latitude != "")) {
-                Toast.makeText(PictureActivity.this, "Successfully dropped Photo!", Toast.LENGTH_LONG).show();
+//                Toast.makeText(PictureActivity.this, "Successfully dropped Photo!", Toast.LENGTH_LONG).show();
+                Toast.makeText(PictureActivity.this, Latitude, Toast.LENGTH_LONG).show();
                 CommentLine = mCommentText.getText().toString();
 
                 Intent intent = new Intent(PictureActivity.this, MainActivity.class);
