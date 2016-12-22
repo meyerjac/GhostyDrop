@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:padding="15dp"
+    android:padding="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:id="@+id/photoImageView"
         android:src="@mipmap/arrows"
         android:scaleType="centerCrop"/>
@@ -15,33 +15,35 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#ffffff"
+        android:background="@color/colorAccent"
         android:layout_height="match_parent"
         android:padding="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:id="@+id/photoCommentTextView"
             android:textSize="20dp"
             android:textStyle="bold"
             android:text="Photo description"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorPrimaryText"/>
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="distance away"
-            android:id="@+id/distanceTextView"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/colorAccent"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="distance away"
+                android:id="@+id/distanceTextView"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="136dp"
+                android:layout_marginStart="136dp" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -75,12 +75,10 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         loc2.setLongitude(lon2);
 
         float distanceInMeters = loc1.distanceTo(loc2);
+        double distanceInMiles=distanceInMeters * 0.000621371;
+        int roundedMiles = (int) distanceInMiles;
 
-
-        DistanceText.setText("Only " + distanceInMeters + "meters away");
-
-
-
+                DistanceText.setText(roundedMiles + " miles away");
     }
 
     public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
