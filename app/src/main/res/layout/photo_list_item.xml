@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--<ImageView-->
-        <!--android:layout_width="130dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:id="@+id/photoImageView"-->
-        <!--android:src="@mipmap/arrows"-->
-        <!--android:scaleType="centerCrop"/>-->
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:id="@+id/photoImageView"
+        android:src="@mipmap/arrows"
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:orientation="vertical"
