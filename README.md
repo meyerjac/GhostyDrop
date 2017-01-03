@@ -1,4 +1,4 @@
-# _GhostyDrop_
+# _GhostDrop_
 
 #### _Location-based Photo sharing Android app, 22 December 2016_
 
@@ -10,7 +10,7 @@ _The premise of this app is that people like visceral interaction and what bette
 
 ## Setup/Installation Requirements
 
-* _Please navigate to my github of this project that can be found at https://github.com/meyerjac/GhostyDrop_
+* _Please navigate to my github of this project that can be found at https://github.com/meyerjac/GhostDrop_
 * _Then open the cloned project in Android Studios_
 * _Then run the project on the Emulator or a real device_
 
