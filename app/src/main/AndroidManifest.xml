@@ -6,9 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />﻿
-
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    ﻿
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true" />
@@ -24,21 +23,26 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".PictureActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FindPictureListActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AboutActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".DiscoverActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".FindPictureListActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

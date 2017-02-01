@@ -50,4 +50,13 @@ android:gravity="center_horizontal"
         android:layout_alignParentEnd="true"
         android:id="@+id/discoverButton" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/g"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/discoverButton"
+        android:layout_alignStart="@+id/discoverButton"
+        android:id="@+id/profileImageView" />
+
 </RelativeLayout>

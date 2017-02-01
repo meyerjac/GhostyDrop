@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView mDiscoverButton;
     @Bind(R.id.welcomeText)
     TextView mWelcomeText;
+    @Bind(R.id.profileImageView)
+    ImageView ProfileImageView;
 
 
 
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAboutButton.setOnClickListener(this);
         mDiscoverButton.setOnClickListener(this);
         mCreateGhostButton.setOnClickListener(this);
+        ProfileImageView.setOnClickListener(this);
     }
 
     @Override
@@ -67,15 +70,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mCreateGhostButton) {
         Intent intent = new Intent(MainActivity.this, PictureActivity.class);
             startActivity(intent);
-        } if (v == mAboutButton) {
+        } else if (v == mAboutButton) {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
-        } if (v == mDiscoverButton) {
+        } else if (v == mDiscoverButton) {
             Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
 
             intent.putExtra("long", Longitude);
             intent.putExtra("lat", Latitude);
           startActivity(intent);
+        } else if (v ==ProfileImageView) {
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
         }
     }
 }
