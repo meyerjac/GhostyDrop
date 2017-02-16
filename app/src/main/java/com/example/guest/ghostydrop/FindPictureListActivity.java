@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.adapters.FirebasePhotoViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +23,7 @@ public class FindPictureListActivity extends AppCompatActivity {
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

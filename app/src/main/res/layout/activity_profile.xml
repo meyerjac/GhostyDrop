@@ -18,4 +18,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="127dp"
         android:id="@+id/profileTextView" />
+
+    <Button
+        android:text="Logout current user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="28dp"
+        android:onClick="logout"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="23dp"
+        android:id="@+id/logoutButton" />
+
 </RelativeLayout>
