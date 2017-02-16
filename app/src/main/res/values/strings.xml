@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GhostyDrop</string>
+    <string name="facebook_app_id">378531039185924</string>
+    <string name="firebase_error_login">An Error has occurred while trying to log you into our database</string>
+    <string name="error_login">there has been an error logging in</string>
+    <string name="cancel_login">cancelled login</string>
+
 </resources>
