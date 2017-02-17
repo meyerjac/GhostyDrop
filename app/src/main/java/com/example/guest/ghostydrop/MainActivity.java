@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView CameraLogo;
     @Bind(R.id.searchLogo)
     ImageView SearchLogo;
-    @Bind(R.id.profileLogo)
+    @Bind(R.id.profileImageView)
     ImageView ProfileLogo;
 
     @Override
@@ -145,8 +145,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String firstName = "";
             String lastName = "";
             String displayName = "";
-            String bio = "";
-            String birthday = "";
+            String bio = "Hi there! I'm Sam, I am a bot built by the ghost drop team to generate a random bio for you, and so here is your temporary bio: I am a person who enjoys the simple things in life, but enjoys sophisticated conversation";
+            String birthday = "10000";
             String email = "";
             String facebookId = "";
             String picture = "";

@@ -1,5 +1,6 @@
 package com.example.guest.ghostydrop;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,6 +41,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     Button Logout;
     @Bind(R.id.editProfileButton)
     Button EditProfileButton;
+    @Bind(R.id.searchImageView)
+    ImageView SearchImageView;
+    @Bind(R.id.profileImageView)
+    ImageView ProfileImageView;
+    @Bind(R.id.headerTextView)
+    TextView HeaderTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         fillProfileData();
         EditProfileButton.setOnClickListener((View.OnClickListener) this);
+        HeaderTextView.setOnClickListener((View.OnClickListener) this);
+        SearchImageView.setOnClickListener((View.OnClickListener) this);
     }
 
     private void fillProfileData() {
@@ -68,6 +78,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 Log.d(TAG, dataSnapshot.child("lastName").getValue().toString());
 
                 DisplayNameTextView.setText(dataSnapshot.child("displayName").getValue().toString());
+                AgeTextView.setText(dataSnapshot.child("birthday").getValue().toString());
                 String profilePictureURL = dataSnapshot.child("picture").getValue().toString();
                 new DownloadImageTask((ImageView) findViewById(R.id.profilePictureImageView))
                         .execute(profilePictureURL);
@@ -92,8 +103,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (v == EditProfileButton) {
-            //have dialog box poplate and 
-            Log.d(TAG, "onClick: edit tedt");
+            FragmentManager fm = getFragmentManager();
+            EditProfileDialogBoxFragment editProfDialogBox = new EditProfileDialogBoxFragment();
+                editProfDialogBox.show(fm, "dialog is shown");
+
+        } else if (v == SearchImageView) {
+            Intent intent = new Intent(ProfileActivity.this, FindPictureListActivity.class);
+            startActivity(intent);
+        } else if (v == HeaderTextView) {
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 

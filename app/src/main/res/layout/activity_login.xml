@@ -31,15 +31,14 @@
         android:visibility="gone" />
 
     <TextView
-        android:text="   GhostDrop"
+        android:text="GhostDrop"
       android:background="@color/colorPrimaryBackground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:foregroundGravity="center_vertical"
         android:id="@+id/welcomeTextView"
         android:textSize="60sp"
-        android:padding="9dp"
-        android:layout_below="@+id/progressBar"
+        android:padding="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

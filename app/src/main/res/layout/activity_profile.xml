@@ -23,8 +23,8 @@ android:background="@color/colorBlue"
             android:layout_width="75dp"
             android:layout_height="2dp"
             android:background="@color/colorBlack"
-            android:layout_below="@id/profileLogo"
-            android:layout_marginTop="10dp"
+            android:layout_below="@id/profileImageView"
+            android:layout_marginTop="18dp"
             android:layout_marginLeft="4dp"
             android:id="@+id/horizLine" />
 
@@ -36,13 +36,13 @@ android:background="@color/colorBlue"
             android:layout_margin="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/searchLogo" />
+            android:id="@+id/searchImageView" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:srcCompat="@mipmap/profile_black"
-            android:id="@+id/profileLogo"
+            android:id="@+id/profileImageView"
             android:layout_marginLeft="14dp"
             android:layout_marginStart="14dp"
             android:layout_alignTop="@+id/searchLogo"
@@ -53,10 +53,10 @@ android:background="@color/colorBlue"
             android:text="GhostDrop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
+            android:id="@+id/headerTextView"
             android:textSize="38sp"
             android:textColor="@color/colorWhite"
-            android:layout_alignTop="@+id/profileLogo"
+            android:layout_alignTop="@+id/profileImageView"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
@@ -78,7 +78,7 @@ android:background="@color/colorBlue"
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Display Name"
+        android:text=""
         android:layout_marginLeft="5dp"
         android:textSize="23dp"
         android:layout_width="wrap_content"
@@ -166,6 +166,4 @@ android:background="@color/colorBlue"
         android:layout_marginLeft="5dp"
         android:layout_below="@id/socialChunk"
      />
-
-
 </RelativeLayout>

@@ -75,7 +75,7 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
                     .into(Image);
         }
 
-        PhotoComment.setText(picture.getComment());
+        PhotoComment.setText(picture.getCaption());
         double lat1 = Double.parseDouble(picture.getLatitude());
         double lat2 = Double.parseDouble(mLat);
 
