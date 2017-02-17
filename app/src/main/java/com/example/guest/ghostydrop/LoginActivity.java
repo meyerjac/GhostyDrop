@@ -28,12 +28,10 @@ import java.util.Arrays;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity {
-
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-
     private ProgressBar progressBar;
 
     @Override

@@ -1,13 +1,11 @@
 package com.example.guest.ghostydrop;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guest.ghostydrop.Constructors.Picture;
@@ -51,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView CameraLogo;
     @Bind(R.id.searchLogo)
     ImageView SearchLogo;
-    @Bind(R.id.welcomeText)
-    TextView mWelcomeText;
     @Bind(R.id.profileLogo)
     ImageView ProfileLogo;
 
@@ -61,11 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        String fontPath = "fonts/Roboto-Regular.ttf";
-        Typeface RobotoFont = Typeface.createFromAsset(getAssets(), fontPath);
-        mWelcomeText.setTypeface(RobotoFont);
-
         mPhotosRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -92,30 +83,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-//        if (user != null) {
-//            Toast.makeText(this, "user is not null", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(MainActivity.this, "Failed to fetch user Data, connect to the internet!", Toast.LENGTH_SHORT).show();
-//        }
-
         Intent intent = getIntent();
         String bitmap = intent.getStringExtra("bitmap");
         Longitude = intent.getStringExtra("longi");
         Latitude = intent.getStringExtra("lati");
         String com = intent.getStringExtra("com");
-        String comment = com;
+        String caption = com;
         String pictureURL = bitmap;
         String latitude = Latitude;
         String longitude = Longitude;
+        ArrayList<String> comments = new ArrayList<String>(); {{
+            comments.add("0");
+        }}
 
-        pictures = new Picture(comment, pictureURL, latitude, longitude);
+        pictures = new Picture(caption, pictureURL, latitude, longitude, uid, comments);
         mPhotosRef.push().setValue(pictures);
 
         SearchLogo.setOnClickListener(this);
         CameraLogo.setOnClickListener(this);
         ProfileLogo.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {

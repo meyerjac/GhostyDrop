@@ -31,7 +31,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:text="Photo description"
-            android:textColor="@color/colorPrimaryText" />
+            android:textColor="@color/colorBlack" />
 
 
         <RelativeLayout
@@ -44,7 +44,7 @@
                 android:text="distance away"
                 android:id="@+id/distanceTextView"
                 android:textSize="20dp"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorBlack"
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/collectPhoto"
                 android:layout_toStartOf="@+id/collectPhoto" />

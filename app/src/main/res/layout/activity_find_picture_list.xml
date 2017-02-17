@@ -2,18 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_discover"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlue"
-    tools:context="com.example.guest.ghostydrop.MainActivity">
 
+    android:background="@color/colorPrimary"
+    tools:context="com.example.guest.ghostydrop.FindPictureListActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_bar"
+        android:id="@+id/recyclerView"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="100dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="4dp"
         android:id="@+id/top_bar"
         android:background="@color/colorAccent"
         android:layout_alignParentTop="true"
@@ -24,12 +31,23 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@mipmap/search_white"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/searchLogo" />
+            android:id="@+id/searchLogo"
+            app:srcCompat="@mipmap/search_black" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@mipmap/social_white"
+            android:id="@+id/profileLogo"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_alignTop="@+id/searchLogo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:text="GhostDrop"
@@ -37,26 +55,21 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView"
             android:textSize="38sp"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/colorWhite"
             android:layout_alignTop="@+id/profileLogo"
             android:layout_centerHorizontal="true" />
+
         <View
-            android:layout_width="150dp"
+            android:layout_width="75dp"
             android:layout_height="2dp"
             android:background="@color/colorBlack"
-            android:layout_below="@id/textView"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="15dp"
-            android:id="@+id/horizLine" />
+            android:id="@+id/horizLine"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="4dp"
+            android:layout_below="@+id/profileLogo"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@mipmap/social_white"
-            android:id="@+id/profileLogo"
-            android:layout_alignTop="@+id/searchLogo"
-            android:layout_toLeftOf="@+id/textView"
-            android:layout_toStartOf="@+id/textView" />
     </RelativeLayout>
 
     <ImageView
@@ -67,4 +80,5 @@
         android:layout_marginBottom="24dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

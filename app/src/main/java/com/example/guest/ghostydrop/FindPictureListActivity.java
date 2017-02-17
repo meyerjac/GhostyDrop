@@ -28,7 +28,7 @@ public class FindPictureListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_discover);
+        setContentView(R.layout.activity_find_picture_list);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
