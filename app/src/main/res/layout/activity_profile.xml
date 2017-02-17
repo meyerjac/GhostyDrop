@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_profile"
     android:layout_width="match_parent"
@@ -10,24 +11,88 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.guest.ghostydrop.ProfileActivity">
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/com_facebook_button_icon_blue"
+        android:id="@+id/profilePictureImageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <TextView
-        android:text="TextView"
+        android:text="Display Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/displayNameTextView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="127dp"
-        android:id="@+id/profileTextView" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+    android:text="10,000"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/ageTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+    android:text="years old"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/yearsOldTextView"
+        android:layout_alignBaseline="@+id/ageTextView"
+        android:layout_alignBottom="@+id/ageTextView"
+        android:layout_toRightOf="@+id/ageTextView"
+        android:layout_toEndOf="@+id/ageTextView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:text="Hi there, I'm a person and I enjoy going on long walks on the beach and looking for seashells, also I play lots of video games and tend to freak out if I lose...just kidding, that would be pathetic, I do enjoy hanging with friends and staying up late having thoughtful conversations"
+        android:layout_width="match_parent"
+        android:id="@+id/bioTextView"
+        android:layout_height="100dp"
+        android:layout_below="@+id/yearsOldTextView"
+        android:layout_toLeftOf="@+id/profilePictureImageView"
+        android:layout_toStartOf="@+id/profilePictureImageView"
+        android:layout_alignBottom="@+id/profilePictureImageView" />
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+        android:layout_alignParentBottom="true">
+    <Button
+        android:text="Logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="logout"
+        android:background="@color/colorPrimary"
+        android:id="@+id/logoutButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
-        android:text="Logout current user"
+        android:text="Edit Profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="28dp"
-        android:onClick="logout"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="23dp"
-        android:id="@+id/logoutButton" />
+        android:layout_alignTop="@+id/logoutButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorAccent"
+        android:id="@+id/editProfileButton" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/bioTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp" />
+
 
 </RelativeLayout>
