@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mPhotosRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
+
         mUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
         msnapRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER);
 
@@ -83,21 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        Intent intent = getIntent();
-        String bitmap = intent.getStringExtra("bitmap");
-        Longitude = intent.getStringExtra("longi");
-        Latitude = intent.getStringExtra("lati");
-        String com = intent.getStringExtra("com");
-        String caption = com;
-        String pictureURL = bitmap;
-        String latitude = Latitude;
-        String longitude = Longitude;
-        ArrayList<String> comments = new ArrayList<String>(); {{
-            comments.add("0");
-        }}
-
-        pictures = new Picture(caption, pictureURL, latitude, longitude, uid, comments);
-        mPhotosRef.push().setValue(pictures);
 
         SearchLogo.setOnClickListener(this);
         CameraLogo.setOnClickListener(this);

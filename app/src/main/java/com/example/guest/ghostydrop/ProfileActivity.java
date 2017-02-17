@@ -71,12 +71,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         mCurrentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, dataSnapshot.child("displayName").getValue().toString());
-                Log.d(TAG, dataSnapshot.child("bio").getValue().toString());
-                Log.d(TAG, dataSnapshot.child("birthday").getValue().toString());
-                Log.d(TAG, dataSnapshot.child("picture").getValue().toString());
-                Log.d(TAG, dataSnapshot.child("lastName").getValue().toString());
-
                 DisplayNameTextView.setText(dataSnapshot.child("displayName").getValue().toString());
                 AgeTextView.setText(dataSnapshot.child("birthday").getValue().toString());
                 String profilePictureURL = dataSnapshot.child("picture").getValue().toString();

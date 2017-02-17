@@ -8,7 +8,7 @@ public class Picture {
     String imageUrl;
     String latitude;
     String longitude;
-    String uid;
+    String ownerUid;
     ArrayList<String> comments;
 
     public Picture(String caption, String imageUrl, String latitude, String longitude, String ownerUid, ArrayList<String> comments) {
@@ -16,7 +16,7 @@ public class Picture {
         this.imageUrl = imageUrl;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.uid = uid;
+        this.ownerUid = ownerUid;
         this.comments = comments;
     }
 
@@ -36,8 +36,8 @@ public class Picture {
         return longitude;
     }
 
-    public String uid() {
-        return uid;
+    public String getOwnerUid() {
+        return ownerUid;
     }
 
     public ArrayList<String> getComments() {

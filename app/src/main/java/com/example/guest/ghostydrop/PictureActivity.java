@@ -17,13 +17,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guest.ghostydrop.Constructors.Picture;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,11 +45,13 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
     private LocationManager locationManager;
     private LocationListener listener;
     private String Latitude;
+    private String TAG = "Picture Activity";
     private String Longitude;
     private String imageEncoded;
     private String CommentLine;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
+    private DatabaseReference mPhotosRef;
 
     @Bind(imageView)
     ImageView mImageView;
@@ -60,6 +70,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
         setContentView(R.layout.activity_picture);
         ButterKnife.bind(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        mPhotosRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
 
         Latitude = "";
         Longitude = "";
@@ -179,21 +190,30 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 return;
             }
 
-            if (CommentLine == null) {
-                Toast.makeText(PictureActivity.this, "Please add a comment to this picture, Thanks Ghoster", Toast.LENGTH_LONG).show();
+            if (CommentLine.equals("")) {
+                Log.d(TAG, "onClick:  in commentLine!");
+                Toast.makeText(PictureActivity.this, "Please add a caption to this picture, Thanks Ghoster", Toast.LENGTH_LONG).show();
                 return;
             }
             if ((Longitude != "") || (Latitude != "")) {
-//                Toast.makeText(PictureActivity.this, "Successfully dropped Photo!", Toast.LENGTH_LONG).show();
-
                 CommentLine = mCommentText.getText().toString();
+                Log.d("up", CommentLine);
+                String caption = CommentLine;
+                String pictureURL = imageEncoded;
+                String latitude = Latitude;
+                String longitude = Longitude;
+                ArrayList<String> comments = new ArrayList<String>();
+//                {{
+//                    comments.add("0");
+//                }}
 
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                assert user != null;
+                String ownerUid = user.getUid();
+
+                Picture pictures = new Picture(caption, pictureURL, latitude, longitude, ownerUid, comments);
+                mPhotosRef.push().setValue(pictures);
                 Intent intent = new Intent(PictureActivity.this, MainActivity.class);
-                intent.putExtra("bitmap", imageEncoded);
-                intent.putExtra("longi", Longitude);
-                intent.putExtra("lati", Latitude);
-                intent.putExtra("com", CommentLine);
-
                 startActivity(intent);
             }
         }
