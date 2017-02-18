@@ -1,6 +1,7 @@
 package com.example.guest.ghostydrop;
 
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,16 +28,20 @@ import java.io.InputStream;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.example.guest.ghostydrop.R.id.bioTextView;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mCurrentUserRef;
     private static final String TAG = "Debug";
+    private ProgressDialog ProfileProgressDialog;
+
     @Bind(R.id.profilePictureImageView)
     ImageView ProfilePictureImageView;
     @Bind(R.id.displayNameTextView)
     TextView DisplayNameTextView;
     @Bind(R.id.ageTextView)
     TextView AgeTextView;
-    @Bind(R.id.bioTextView)
+    @Bind(bioTextView)
     TextView BioTextView;
     @Bind(R.id.logoutButton)
     Button Logout;
@@ -47,6 +53,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     ImageView ProfileImageView;
     @Bind(R.id.headerTextView)
     TextView HeaderTextView;
+    @Bind(R.id.socialChunk)
+    RelativeLayout SocialChunk;
 
 
     @Override
@@ -55,11 +63,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
 
+        createProfileProgressDialog();
+        ProfileProgressDialog.show();
         fillProfileData();
-        EditProfileButton.setOnClickListener((View.OnClickListener) this);
-        HeaderTextView.setOnClickListener((View.OnClickListener) this);
-        SearchImageView.setOnClickListener((View.OnClickListener) this);
+        EditProfileButton.setOnClickListener(this);
+        HeaderTextView.setOnClickListener(this);
+        SearchImageView.setOnClickListener(this);
     }
+
+    private void createProfileProgressDialog() {
+        ProfileProgressDialog = new ProgressDialog(this);
+        ProfileProgressDialog.setTitle("Loading...");
+        ProfileProgressDialog.setMessage("Generating your profile...");
+        ProfileProgressDialog.setCancelable(false);
+    }
+
 
     private void fillProfileData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -68,14 +86,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         // Get a reference to our posts
-        mCurrentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        mCurrentUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 DisplayNameTextView.setText(dataSnapshot.child("displayName").getValue().toString());
+                BioTextView.setText(dataSnapshot.child("bio").getValue().toString());
                 AgeTextView.setText(dataSnapshot.child("birthday").getValue().toString());
                 String profilePictureURL = dataSnapshot.child("picture").getValue().toString();
                 new DownloadImageTask((ImageView) findViewById(R.id.profilePictureImageView))
                         .execute(profilePictureURL);
+                SocialChunk.setVisibility(View.VISIBLE);
+                ProfileProgressDialog.dismiss();
 
             }
 

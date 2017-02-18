@@ -3,6 +3,7 @@ package com.example.guest.ghostydrop.Constructors;
 
 import java.util.ArrayList;
 
+//this is my constructor for every picture that is taken with my app will contain these properties//
 public class Picture {
     String caption;
     String imageUrl;

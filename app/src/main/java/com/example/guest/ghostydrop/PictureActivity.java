@@ -41,11 +41,11 @@ import static com.example.guest.ghostydrop.R.id.imageView;
 
 public class PictureActivity extends AppCompatActivity implements  View.OnClickListener {
 
+    private String TAG = "Picture Activity";
     private static final int REQUEST_IMAGE_CAPTURE = 111;
     private LocationManager locationManager;
     private LocationListener listener;
     private String Latitude;
-    private String TAG = "Picture Activity";
     private String Longitude;
     private String imageEncoded;
     private String CommentLine;
@@ -191,7 +191,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
             }
 
             if (CommentLine.equals("")) {
-                Log.d(TAG, "onClick:  in commentLine!");
                 Toast.makeText(PictureActivity.this, "Please add a caption to this picture, Thanks Ghoster", Toast.LENGTH_LONG).show();
                 return;
             }

@@ -17,9 +17,15 @@ import android.widget.TextView;
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -34,7 +40,6 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
     public FirebasePhotoViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
-
         mContext = itemView.getContext();
         itemView.setOnClickListener(this);
 
@@ -106,25 +111,21 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
 
     @Override
     public void onClick(View v)  {
+        final ArrayList<Picture> pictures = new ArrayList<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    pictures.add(snapshot.getValue(Picture.class));
+                }
+            }
 
-
-
-//        final ArrayList<Picture> pictures = new ArrayList<>();
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    pictures.add(snapshot.getValue(Picture.class));
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//            }
-//        });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }
 

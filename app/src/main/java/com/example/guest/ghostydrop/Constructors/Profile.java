@@ -1,5 +1,7 @@
 package com.example.guest.ghostydrop.Constructors;
 
+//every profile of this MVP will contain these properties//
+
 import java.util.ArrayList;
 
     public class Profile {

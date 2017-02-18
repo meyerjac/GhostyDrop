@@ -65,13 +65,14 @@ android:background="@color/colorBlue"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/socialChunk"
+        android:visibility="invisible"
         android:layout_below="@id/top_bar"
         android:layout_marginTop="5dp">
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:srcCompat="@drawable/com_facebook_button_icon_blue"
+        app:srcCompat="@mipmap/thatsallfolks"
         android:id="@+id/profilePictureImageView"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -89,7 +90,7 @@ android:background="@color/colorBlue"
         android:layout_alignParentStart="true" />
 
         <TextView
-        android:text="Hi there, I'm a person and I enjoy going on long walks on the beach and looking for seashells, also I play lots of video games and tend to freak out if I lose...just kidding, that would be pathetic, I do enjoy hanging with friends and staying up late having thoughtful conversations"
+        android:text=""
         android:layout_width="match_parent"
         android:id="@+id/bioTextView"
         android:layout_height="100dp"
@@ -118,7 +119,7 @@ android:background="@color/colorBlue"
               />
 
             <TextView
-            android:text="10"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -136,7 +137,8 @@ android:background="@color/colorBlue"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="5dp"
+        android:id="@+id/relativeLayout">
     <Button
         android:text="Logout"
         android:layout_width="100dp"
@@ -162,8 +164,7 @@ android:background="@color/colorBlue"
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@id/socialChunk"
-     />
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
