@@ -69,7 +69,7 @@
         android:layout_below="@id/top_bar"
         android:id="@+id/recyclerView"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="100dp"/>
+        android:layout_above="@+id/cameraLogo" />
 
     <ImageView
         android:layout_width="50dp"

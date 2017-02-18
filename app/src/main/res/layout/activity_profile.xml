@@ -109,16 +109,6 @@ android:background="@color/colorBlue"
             android:layout_alignStart="@+id/displayNameTextView">
 
             <TextView
-            android:text="years old"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/yearsOldTextView"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/ageTextView"
-                android:layout_marginLeft="3dp"
-              />
-
-            <TextView
             android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

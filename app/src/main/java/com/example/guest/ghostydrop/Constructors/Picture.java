@@ -12,6 +12,10 @@ public class Picture {
     String ownerUid;
     ArrayList<String> comments;
 
+    //constructore with no arguments
+    public Picture() {
+    }
+
     public Picture(String caption, String imageUrl, String latitude, String longitude, String ownerUid, ArrayList<String> comments) {
         this.caption = caption;
         this.imageUrl = imageUrl;
