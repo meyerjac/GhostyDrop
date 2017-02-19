@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="4dp"
         android:id="@+id/top_bar"
         android:background="@color/colorAccent"
         android:layout_alignParentTop="true"
@@ -24,12 +23,23 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@mipmap/search_white"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/searchLogo" />
+            android:id="@+id/searchLogo"
+            app:srcCompat="@mipmap/search_white" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@mipmap/social_white"
+            android:id="@+id/profileImageView"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_alignTop="@+id/searchLogo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:text="GhostDrop"
@@ -37,9 +47,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/headerText"
             android:textSize="38sp"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/colorWhite"
             android:layout_alignTop="@+id/profileImageView"
             android:layout_centerHorizontal="true" />
+
         <View
             android:layout_width="150dp"
             android:layout_height="2dp"
@@ -49,15 +60,6 @@
             android:layout_marginTop="15dp"
             android:id="@+id/horizLine" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@mipmap/social_white"
-            android:id="@+id/profileImageView"
-            android:layout_alignTop="@+id/searchLogo"
-            android:layout_alignParentLeft="true"
-
-            />
     </RelativeLayout>
 
     <ImageView
@@ -69,3 +71,4 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
+

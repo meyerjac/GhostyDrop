@@ -78,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-
         SearchLogo.setOnClickListener(this);
         CameraLogo.setOnClickListener(this);
         ProfileLogo.setOnClickListener(this);

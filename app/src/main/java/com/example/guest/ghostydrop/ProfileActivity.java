@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -47,11 +48,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     Button Logout;
     @Bind(R.id.editProfileButton)
     Button EditProfileButton;
-    @Bind(R.id.searchImageView)
+    @Bind(R.id.searchLogo)
     ImageView SearchImageView;
     @Bind(R.id.profileImageView)
     ImageView ProfileImageView;
-    @Bind(R.id.headerTextView)
+    @Bind(R.id.headerText)
     TextView HeaderTextView;
     @Bind(R.id.socialChunk)
     RelativeLayout SocialChunk;
@@ -65,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         createProfileProgressDialog();
         ProfileProgressDialog.show();
+        delayDialog();
         fillProfileData();
         EditProfileButton.setOnClickListener(this);
         HeaderTextView.setOnClickListener(this);
@@ -76,6 +78,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         ProfileProgressDialog.setTitle("Loading...");
         ProfileProgressDialog.setMessage("Generating your profile...");
         ProfileProgressDialog.setCancelable(false);
+    }
+
+    private void delayDialog() {
+        //3 second delay for the progress dialog
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                ProfileProgressDialog.dismiss();
+            }
+        }, 1500);
     }
 
 
@@ -96,7 +108,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 new DownloadImageTask((ImageView) findViewById(R.id.profilePictureImageView))
                         .execute(profilePictureURL);
                 SocialChunk.setVisibility(View.VISIBLE);
-                ProfileProgressDialog.dismiss();
 
             }
 

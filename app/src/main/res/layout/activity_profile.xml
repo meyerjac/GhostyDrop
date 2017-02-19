@@ -12,36 +12,27 @@ android:background="@color/colorBlue"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="4dp"
         android:id="@+id/top_bar"
         android:background="@color/colorAccent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <View
-            android:layout_width="75dp"
-            android:layout_height="2dp"
-            android:background="@color/colorBlack"
-            android:layout_below="@id/profileImageView"
-            android:layout_marginTop="18dp"
-            android:layout_marginLeft="4dp"
-            android:id="@+id/horizLine" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@mipmap/search_white"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/searchImageView" />
+            android:id="@+id/searchLogo"
+            app:srcCompat="@mipmap/search_black" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@mipmap/profile_black"
+            app:srcCompat="@mipmap/social_white"
             android:id="@+id/profileImageView"
             android:layout_marginLeft="14dp"
             android:layout_marginStart="14dp"
@@ -53,17 +44,25 @@ android:background="@color/colorBlue"
             android:text="GhostDrop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/headerTextView"
+            android:id="@+id/headerText"
             android:textSize="38sp"
             android:textColor="@color/colorWhite"
             android:layout_alignTop="@+id/profileImageView"
             android:layout_centerHorizontal="true" />
 
+        <View
+            android:layout_width="75dp"
+            android:layout_height="2dp"
+            android:background="@color/colorBlack"
+            android:layout_below="@id/profileImageView"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="4dp"
+            android:id="@+id/horizLine" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:id="@+id/socialChunk"
         android:visibility="invisible"
         android:layout_below="@id/top_bar"
@@ -72,7 +71,6 @@ android:background="@color/colorBlue"
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:srcCompat="@mipmap/thatsallfolks"
         android:id="@+id/profilePictureImageView"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -125,9 +123,9 @@ android:background="@color/colorBlue"
     android:layout_width="match_parent"
     android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:id="@+id/relativeLayout">
     <Button
         android:text="Logout"
@@ -156,5 +154,8 @@ android:background="@color/colorBlue"
         android:layout_height="200dp"
         android:layout_above="@+id/relativeLayout"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/socialChunk" />
 </RelativeLayout>
+
+

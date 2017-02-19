@@ -1,10 +1,15 @@
 package com.example.guest.ghostydrop;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.adapters.FirebasePhotoViewHolder;
@@ -15,14 +20,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class FindPictureListActivity extends AppCompatActivity {
+public class FindPictureListActivity extends AppCompatActivity implements View.OnClickListener{
     public String Latitude;
     public String Longitude;
     private DatabaseReference mDatabaseRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private ProgressDialog loadPictureProgressDialog;
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
+    @Bind(R.id.profileImageView)
+    ImageView ProfileImageView;
+    @Bind(R.id.headerText)
+    TextView HeaderText;
 
 
     @Override
@@ -30,6 +40,10 @@ public class FindPictureListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_picture_list);
         ButterKnife.bind(this);
+        createLoadPictureProgressDialog();
+        loadPictureProgressDialog.show();
+        delayDialog();
+
 
         Intent intent = getIntent();
         Longitude = intent.getStringExtra("long");
@@ -37,6 +51,26 @@ public class FindPictureListActivity extends AppCompatActivity {
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
         setUpFirebaseAdapter();
+
+        HeaderText.setOnClickListener((View.OnClickListener) this);
+        ProfileImageView.setOnClickListener((View.OnClickListener) this);
+    }
+
+    private void delayDialog() {
+        //3 second delay for the progress dialog
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                loadPictureProgressDialog.dismiss();
+            }
+        }, 2000);
+    }
+
+    private void createLoadPictureProgressDialog() {
+        loadPictureProgressDialog = new ProgressDialog(this);
+        loadPictureProgressDialog.setTitle("Loading...");
+        loadPictureProgressDialog.setMessage("Finding all the awesome pictures near you...");
+        loadPictureProgressDialog.setCancelable(false);
     }
 
     private void setUpFirebaseAdapter() {
@@ -60,5 +94,16 @@ public class FindPictureListActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mFirebaseAdapter.cleanup();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v  == ProfileImageView) {
+            Intent intent = new Intent(FindPictureListActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        } else if (v == HeaderText) {
+            Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 }
