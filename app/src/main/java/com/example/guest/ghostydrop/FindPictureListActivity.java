@@ -33,6 +33,8 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
     ImageView ProfileImageView;
     @Bind(R.id.headerText)
     TextView HeaderText;
+    @Bind(R.id.cameraLogo)
+    ImageView CameraLogo;
 
 
     @Override
@@ -54,6 +56,7 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
 
         HeaderText.setOnClickListener((View.OnClickListener) this);
         ProfileImageView.setOnClickListener((View.OnClickListener) this);
+        CameraLogo.setOnClickListener((View.OnClickListener) this);
     }
 
     private void delayDialog() {
@@ -103,6 +106,9 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
             startActivity(intent);
         } else if (v == HeaderText) {
             Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else if (v == CameraLogo) {
+            Intent intent = new Intent(FindPictureListActivity.this, PictureActivity.class);
             startActivity(intent);
         }
     }

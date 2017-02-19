@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
     private DatabaseReference PhotoOwnerRef;
+    private DatabaseReference mCurrentUserRef;
     private String mLat;
     private String mLong;
     View mView;
@@ -47,13 +50,13 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
 
     }
 
-    public void bindPicture(Picture picture) {
+    public void bindPicture(final Picture picture) {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
         mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
 
 
-        TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
+        final TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
         ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
@@ -65,11 +68,24 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
                 Log.d("Debug", "onClick: owner name");
             }
         });
+
         CollectPhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Log.d("Debug", "onClick: aved");
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = user.getUid();
+
+                DatabaseReference UserRef = FirebaseDatabase
+                        .getInstance()
+                        .getReference(Constants.FIREBASE_CHILD_USER)
+                        .child(uid).child("collectedPhotos");
+
+                DatabaseReference pushRef = UserRef.push();
+                String pushId = pushRef.getKey();
+                picture.setPushId(pushId);
+                pushRef.setValue(picture);
             }
+
         });
         Typeface typeface = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
                 "fonts/Roboto-Regular.ttf");

@@ -2,9 +2,7 @@ package com.example.guest.ghostydrop.Constructors;
 
 //every profile of this MVP will contain these properties//
 
-import java.util.ArrayList;
-
-    public class Profile {
+public class Profile {
         String firstName;
         String lastName;
         String displayName;
@@ -14,9 +12,8 @@ import java.util.ArrayList;
         String facebookId;
         String picture;
         private String pushId;
-        ArrayList<String> CollectedPhotos;
 
-        public Profile(String firstName, String lastName, String displayName, String bio, String birthday, String email, String facebookId, String picture, ArrayList<String> collectedPhotos) {
+        public Profile(String firstName, String lastName, String displayName, String bio, String birthday, String email, String facebookId, String picture) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.displayName = displayName;
@@ -25,7 +22,6 @@ import java.util.ArrayList;
             this.email = email;
             this.facebookId = facebookId;
             this.picture = picture;
-            CollectedPhotos = collectedPhotos;
         }
 
         public String getFirstName() {
@@ -62,10 +58,6 @@ import java.util.ArrayList;
 
         public String getPushId() {
             return pushId;
-        }
-
-        public ArrayList<String> getCollectedPhotos() {
-            return CollectedPhotos;
         }
 
         public void setPushId(String pushId) {

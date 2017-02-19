@@ -17,7 +17,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -196,22 +195,26 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
             }
             if ((Longitude != "") || (Latitude != "")) {
                 CommentLine = mCommentText.getText().toString();
-                Log.d("up", CommentLine);
+
                 String caption = CommentLine;
                 String pictureURL = imageEncoded;
                 String latitude = Latitude;
                 String longitude = Longitude;
                 ArrayList<String> comments = new ArrayList<String>();
-//                {{
-//                    comments.add("0");
-//                }}
+                {{
+                    comments.add("0");
+                }}
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 assert user != null;
                 String ownerUid = user.getUid();
 
-                Picture pictures = new Picture(caption, pictureURL, latitude, longitude, ownerUid, comments);
-                mPhotosRef.push().setValue(pictures);
+                DatabaseReference pushRef = mPhotosRef.push();
+                String pushId = pushRef.getKey();
+                Picture picture = new Picture(caption, pictureURL, latitude, longitude, ownerUid, comments);
+                picture.setPushId(pushId);
+                pushRef.setValue(picture);
+
                 Intent intent = new Intent(PictureActivity.this, MainActivity.class);
                 startActivity(intent);
             }

@@ -11,6 +11,7 @@ public class Picture {
     String longitude;
     String ownerUid;
     ArrayList<String> comments;
+    private String pushId;
 
     //constructore with no arguments
     public Picture() {
@@ -47,6 +48,14 @@ public class Picture {
 
     public ArrayList<String> getComments() {
         return comments;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
 

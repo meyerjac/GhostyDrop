@@ -132,7 +132,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             FragmentManager fm = getFragmentManager();
             EditProfileDialogBoxFragment editProfDialogBox = new EditProfileDialogBoxFragment();
                 editProfDialogBox.show(fm, "dialog is shown");
-
         } else if (v == SearchImageView) {
             Intent intent = new Intent(ProfileActivity.this, FindPictureListActivity.class);
             startActivity(intent);

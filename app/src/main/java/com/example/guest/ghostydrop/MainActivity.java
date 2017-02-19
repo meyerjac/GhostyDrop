@@ -25,8 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -145,11 +143,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject picturePicture = facebookJSON.getJSONObject("picture");
                 JSONObject pictureData = picturePicture.getJSONObject("data");
             picture = pictureData.getString("url");
-            ArrayList<String> CollectedPhotos = new ArrayList<String>(); {{
-                CollectedPhotos.add("0");
-            }}
 
-            Profile profile = new Profile(firstName, lastName, displayName, bio, birthday, email, facebookId, picture, CollectedPhotos);
+            Profile profile = new Profile(firstName, lastName, displayName, bio, birthday, email, facebookId, picture);
             mUserRef.setValue(profile);
 
         } catch (JSONException e) {
