@@ -35,11 +35,10 @@
       android:background="@color/colorPrimaryBackground"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:foregroundGravity="center_vertical"
         android:id="@+id/welcomeTextView"
         android:textSize="60sp"
-        android:padding="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:padding="2dp"
+    android:gravity="center"
+        android:alpha=".5" />
 </RelativeLayout>
 

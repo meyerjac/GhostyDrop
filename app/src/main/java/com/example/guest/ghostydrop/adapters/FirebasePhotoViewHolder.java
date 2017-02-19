@@ -9,6 +9,7 @@ import android.location.Location;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
+    private DatabaseReference PhotoOwnerRef;
     private String mLat;
     private String mLong;
     View mView;
@@ -53,16 +55,29 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
 
         TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
-        ImageView  Image= (ImageView) mView.findViewById(R.id. photoImageView);
+        final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
+        ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
         Button CollectPhoto = (Button) mView.findViewById(R.id.collectPhoto);
-        CollectPhoto.setOnClickListener(this);
 
+        OwnerName.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Log.d("Debug", "onClick: owner name");
+            }
+        });
+        CollectPhoto.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Log.d("Debug", "onClick: aved");
+            }
+        });
         Typeface typeface = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
                 "fonts/Roboto-Regular.ttf");
         Typeface typeface2 = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
                 "fonts/Walkway_Oblique_Bold.ttf");
 
         PhotoComment.setTypeface(typeface);
+        OwnerName.setTypeface(typeface);
         DistanceText.setTypeface(typeface2);
 
         if (!picture.getImageUrl().contains("http")) {
@@ -81,6 +96,23 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         }
 
         PhotoComment.setText(picture.getCaption());
+        String postUid = picture.getOwnerUid();
+        //retreiving photo owner uid
+        PhotoOwnerRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(postUid);
+        PhotoOwnerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                OwnerName.setText(dataSnapshot.child("displayName").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
         double lat1 = Double.parseDouble(picture.getLatitude());
         double lat2 = Double.parseDouble(mLat);
 
@@ -101,6 +133,7 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
 
         DistanceText.setText(roundedMiles + " miles away");
     }
+
     public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
         byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
