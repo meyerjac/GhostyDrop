@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constructors.Picture;
-import com.example.guest.ghostydrop.adapters.FirebasePhotoViewHolder;
+import com.example.guest.ghostydrop.adapters.FirebaseAllPhotosViewHolder;
 import com.example.guest.ghostydrop.util.Android_Gesture_Detector;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -59,6 +59,26 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
         HeaderText.setOnClickListener((View.OnClickListener) this);
         ProfileImageView.setOnClickListener((View.OnClickListener) this);
         CameraLogo.setOnClickListener((View.OnClickListener) this);
+
+        Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
+            @Override
+            public void onSwipeRight() {
+                Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        };
+        mGestureDetector = new GestureDetector(this, custom_gesture_detector);
+    }
+
+    //responsible for touch events, handles them
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (0 == 0) {
+            mGestureDetector.onTouchEvent(event);
+            return super.onTouchEvent(event);
+        } else {
+            return false;
+        }
     }
 
     private void delayDialog() {
@@ -79,39 +99,23 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
     }
 
     private void setUpFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, FirebasePhotoViewHolder>
-                (Picture.class, R.layout.photo_list_item, FirebasePhotoViewHolder.class,
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, FirebaseAllPhotosViewHolder>
+                (Picture.class, R.layout.photo_list_item, FirebaseAllPhotosViewHolder.class,
                         mDatabaseRef) {
 
             @Override
-            protected void populateViewHolder(FirebasePhotoViewHolder viewHolder,
+            protected void populateViewHolder(FirebaseAllPhotosViewHolder viewHolder,
                                               Picture model, int position) {
 
                 viewHolder.bindPicture(model);
             }
         };
+
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
-        Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
-            @Override
-            public void onSwipeRight() {
-                Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        };
-        mGestureDetector = new GestureDetector(this, custom_gesture_detector);
-    }
 
-    //responsible for touch events, handles them
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (0 == 0) {
-            mGestureDetector.onTouchEvent(event);
-            return super.onTouchEvent(event);
-        } else {
-            return false;
-        }
+
     }
 
     @Override

@@ -55,7 +55,7 @@ android:id="@+id/baseLayout">
             android:layout_centerHorizontal="true" />
 
         <EditText
-            android:hint="Bio of how amaziong you are!"
+            android:hint="enter Bio of how amazing you are!"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="10dp"

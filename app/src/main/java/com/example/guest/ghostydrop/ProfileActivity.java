@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -18,7 +20,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.guest.ghostydrop.Constructors.Picture;
+import com.example.guest.ghostydrop.adapters.SavedPicturesInProfileViewHolder;
 import com.example.guest.ghostydrop.util.Android_Gesture_Detector;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,8 +41,10 @@ import static com.example.guest.ghostydrop.R.id.bioTextView;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mCurrentUserRef;
+    private DatabaseReference SavedPhotoDatabaseRef;
     private ProgressDialog ProfileProgressDialog;
     private GestureDetector mGestureDetector;
+    private FirebaseRecyclerAdapter mFirebaseAdapter;
     private static final String TAG = "Debug";
 
     @Bind(R.id.profilePictureImageView)
@@ -60,6 +67,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     TextView HeaderTextView;
     @Bind(R.id.socialChunk)
     RelativeLayout SocialChunk;
+    @Bind(R.id.savedPictureRecyclerView)
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +79,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         createProfileProgressDialog();
         ProfileProgressDialog.show();
         delayDialog();
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        mCurrentUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
+        SavedPhotoDatabaseRef = mCurrentUserRef.child("collectedPhotos");
+        Log.d(TAG, "onCreate: " + SavedPhotoDatabaseRef.toString());
+        setUpProfileCollectedPhotosFirebaseAdapter();
+
+
         fillProfileData();
         EditProfileButton.setOnClickListener(this);
         HeaderTextView.setOnClickListener(this);
@@ -97,6 +116,27 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+
+    private void setUpProfileCollectedPhotosFirebaseAdapter() {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, SavedPicturesInProfileViewHolder>
+                (Picture.class, R.layout.photo_list_item, SavedPicturesInProfileViewHolder.class,
+                        SavedPhotoDatabaseRef) {
+
+            @Override
+            protected void populateViewHolder(SavedPicturesInProfileViewHolder viewHolder,
+                                              Picture model, int position) {
+
+                viewHolder.bindPicture(model);
+            }
+        };
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mFirebaseAdapter);
+
+
+    }
+
     private void createProfileProgressDialog() {
         ProfileProgressDialog = new ProgressDialog(this);
         ProfileProgressDialog.setTitle("Loading...");
@@ -114,14 +154,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }, 1500);
     }
 
-
     private void fillProfileData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         mCurrentUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
 
 
-        // Get a reference to our posts
+        // Get a reference to our profile
         mCurrentUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

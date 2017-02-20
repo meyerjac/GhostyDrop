@@ -11,15 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-
-public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
@@ -42,12 +37,10 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
     View mView;
     Context mContext;
 
-    public FirebasePhotoViewHolder(View itemView) {
+    public SavedPicturesInProfileViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
-
     }
 
     public void bindPicture(final Picture picture) {
@@ -60,7 +53,6 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
         ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
-        Button CollectPhoto = (Button) mView.findViewById(R.id.collectPhoto);
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -69,28 +61,8 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
             }
         });
 
-        CollectPhoto.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String uid = user.getUid();
-
-                DatabaseReference UserRef = FirebaseDatabase
-                        .getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_USER)
-                        .child(uid).child("collectedPhotos");
-
-                DatabaseReference pushRef = UserRef.push();
-                String pushId = pushRef.getKey();
-                picture.setPushId(pushId);
-                pushRef.setValue(picture);
-            }
-
-        });
-        Typeface typeface = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
-                "fonts/Roboto-Regular.ttf");
-        Typeface typeface2 = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
-                "fonts/Walkway_Oblique_Bold.ttf");
+        Typeface typeface = Typeface.createFromAsset( PhotoComment.getContext().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface typeface2 = Typeface.createFromAsset( PhotoComment.getContext().getAssets(), "fonts/Walkway_Oblique_Bold.ttf");
 
         PhotoComment.setTypeface(typeface);
         OwnerName.setTypeface(typeface);
@@ -113,19 +85,20 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
 
         PhotoComment.setText(picture.getCaption());
         String postUid = picture.getOwnerUid();
-                //retreiving photo owner uid
-                PhotoOwnerRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(postUid);
-                PhotoOwnerRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                      public void onDataChange(DataSnapshot dataSnapshot) {
-                        OwnerName.setText(dataSnapshot.child("displayName").getValue().toString());
-                       }
 
-                    @Override
-                        public void onCancelled(DatabaseError databaseError) {
+        //retreiving photo owner uid
+        PhotoOwnerRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(postUid);
+        PhotoOwnerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                OwnerName.setText(dataSnapshot.child("displayName").getValue().toString());
+            }
 
-                    }
-                });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         double lat1 = Double.parseDouble(picture.getLatitude());
         double lat2 = Double.parseDouble(mLat);
@@ -153,28 +126,4 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
         return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
 
     }
-
-
-
-    @Override
-    public void onClick(View v)  {
-        final ArrayList<Picture> pictures = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    pictures.add(snapshot.getValue(Picture.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 }
-
-
-

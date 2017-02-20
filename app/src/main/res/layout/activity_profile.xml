@@ -150,6 +150,7 @@ android:background="@color/colorBlue"
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/savedPictureRecyclerView"
         android:layout_width="200dp"
         android:gravity="center"
         android:layout_height="200dp"
