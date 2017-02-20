@@ -65,14 +65,6 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/top_bar"
-        android:id="@+id/recyclerView"
-        android:layout_marginTop="10dp"
-        android:layout_above="@+id/cameraLogo" />
-
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -80,5 +72,23 @@
         android:id="@+id/cameraLogo"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="275dp"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        android:layout_below="@+id/top_bar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/cameraLogo" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/back"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/recyclerView"
+        android:layout_toStartOf="@+id/recyclerView"
+        android:id="@+id/imageView5" />
 
 </RelativeLayout>
