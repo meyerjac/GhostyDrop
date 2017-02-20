@@ -83,11 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
             @Override
             public void onSwipeRight() {
-                Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
+
             public void onSwipeLeft() {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
                 startActivity(intent);
             }
         };

@@ -7,12 +7,15 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.adapters.FirebasePhotoViewHolder;
+import com.example.guest.ghostydrop.util.Android_Gesture_Detector;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,6 +29,7 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
     private DatabaseReference mDatabaseRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     private ProgressDialog loadPictureProgressDialog;
+    private GestureDetector mGestureDetector;
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -35,7 +39,6 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
     TextView HeaderText;
     @Bind(R.id.cameraLogo)
     ImageView CameraLogo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,6 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
         Intent intent = getIntent();
         Longitude = intent.getStringExtra("long");
         Latitude = intent.getStringExtra("la");
-
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
         setUpFirebaseAdapter();
 
@@ -91,6 +93,25 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
+        Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
+            @Override
+            public void onSwipeRight() {
+                Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        };
+        mGestureDetector = new GestureDetector(this, custom_gesture_detector);
+    }
+
+    //responsible for touch events, handles them
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (0 == 0) {
+            mGestureDetector.onTouchEvent(event);
+            return super.onTouchEvent(event);
+        } else {
+            return false;
+        }
     }
 
     @Override

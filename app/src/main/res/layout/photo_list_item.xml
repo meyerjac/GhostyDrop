@@ -63,6 +63,7 @@
                 android:id="@+id/distanceTextView"
                 android:textSize="20dp"
                 android:textColor="@color/colorBlack"
+                android:layout_toRightOf="@+id/collectPhoto"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />

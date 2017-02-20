@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.guest.ghostydrop.util.Android_Gesture_Detector;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,8 +36,9 @@ import static com.example.guest.ghostydrop.R.id.bioTextView;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mCurrentUserRef;
-    private static final String TAG = "Debug";
     private ProgressDialog ProfileProgressDialog;
+    private GestureDetector mGestureDetector;
+    private static final String TAG = "Debug";
 
     @Bind(R.id.profilePictureImageView)
     ImageView ProfilePictureImageView;
@@ -57,7 +61,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.socialChunk)
     RelativeLayout SocialChunk;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,27 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         EditProfileButton.setOnClickListener(this);
         HeaderTextView.setOnClickListener(this);
         SearchImageView.setOnClickListener(this);
+
+        //Gesture handler, this is where every action is handled
+        Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
+            @Override
+            public void onSwipeLeft() {
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        };
+        mGestureDetector = new GestureDetector(this, custom_gesture_detector);
+    }
+
+    //responsible for touch events, handles them
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (0 == 0) {
+            mGestureDetector.onTouchEvent(event);
+            return super.onTouchEvent(event);
+        } else {
+            return false;
+        }
     }
 
     private void createProfileProgressDialog() {
