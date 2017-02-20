@@ -27,12 +27,12 @@ android:background="@color/colorBlue"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/searchLogo"
-            app:srcCompat="@mipmap/search_black" />
+            app:srcCompat="@mipmap/search_white" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@mipmap/social_white"
+            app:srcCompat="@mipmap/profile_black"
             android:id="@+id/profileImageView"
             android:layout_marginLeft="14dp"
             android:layout_marginStart="14dp"
@@ -55,7 +55,7 @@ android:background="@color/colorBlue"
             android:layout_height="2dp"
             android:background="@color/colorBlack"
             android:layout_below="@id/profileImageView"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="4dp"
             android:id="@+id/horizLine" />
     </RelativeLayout>
@@ -150,12 +150,20 @@ android:background="@color/colorBlue"
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
+        android:gravity="center"
         android:layout_height="200dp"
-        android:layout_above="@+id/relativeLayout"
+        android:layout_below="@+id/socialChunk"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/next"
+        android:layout_below="@+id/socialChunk"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/socialChunk" />
+        android:id="@+id/imageView2" />
 </RelativeLayout>
 
 

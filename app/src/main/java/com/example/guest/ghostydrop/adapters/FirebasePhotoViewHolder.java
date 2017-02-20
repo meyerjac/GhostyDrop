@@ -113,21 +113,19 @@ public class FirebasePhotoViewHolder extends RecyclerView.ViewHolder implements 
 
         PhotoComment.setText(picture.getCaption());
         String postUid = picture.getOwnerUid();
-        //retreiving photo owner uid
-        PhotoOwnerRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(postUid);
-        PhotoOwnerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                OwnerName.setText(dataSnapshot.child("displayName").getValue().toString());
-            }
+                //retreiving photo owner uid
+                PhotoOwnerRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(postUid);
+                PhotoOwnerRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                      public void onDataChange(DataSnapshot dataSnapshot) {
+                        OwnerName.setText(dataSnapshot.child("displayName").getValue().toString());
+                       }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-
-
+                    }
+                });
 
         double lat1 = Double.parseDouble(picture.getLatitude());
         double lat2 = Double.parseDouble(mLat);
