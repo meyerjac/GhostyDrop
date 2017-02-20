@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 
 public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private static final String TAG = "Debug";
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
@@ -54,6 +55,8 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
         mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
+        Log.d(TAG, "bindPicture: " + mLat);
+        Log.d(TAG, "bindPicture: " + mLong);
 
 
         final TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);

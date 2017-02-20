@@ -201,6 +201,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v == HeaderTextView) {
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             startActivity(intent);
+
+            overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
         }
     }
 
