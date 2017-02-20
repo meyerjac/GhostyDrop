@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.guest.ghostydrop.Constructors.Profile;
+import com.example.guest.ghostydrop.util.Android_Gesture_Detector;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -31,12 +34,10 @@ import butterknife.ButterKnife;
 import static com.example.guest.ghostydrop.R.id.cameraLogo;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "Main";
+    public static final String TAG = "debug";
     private DatabaseReference mUserRef;
     private DatabaseReference msnapRef;
-
-    private String Latitude;
-    private String Longitude;
+    private GestureDetector mGestureDetector;
     private String facebookData;
 
     @Bind(cameraLogo)
@@ -54,11 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
-
         mUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
         msnapRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER);
-
-
 
         // Check to see if this is a first time user
         msnapRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -76,12 +74,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
         SearchLogo.setOnClickListener(this);
         CameraLogo.setOnClickListener(this);
         ProfileLogo.setOnClickListener(this);
+
+        //Gesture handler, this is where every action is handled
+        Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
+            @Override
+            public void onSwipeRight() {
+                Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
+                startActivity(intent);
+            }
+            public void onSwipeLeft() {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        };
+        mGestureDetector = new GestureDetector(this, custom_gesture_detector);
     }
 
+    //responsible for touch events, handles them
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (0 == 0) {
+            mGestureDetector.onTouchEvent(event);
+            return super.onTouchEvent(event);
+        } else {
+            return false;
+        }
+    }
 
+    //click listeners for all our view elements
     @Override
     public void onClick(View v) {
         if (v == CameraLogo) {
@@ -89,14 +113,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (v == SearchLogo) {
             Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
-            intent.putExtra("long", Longitude);
-            intent.putExtra("lat", Latitude);
           startActivity(intent);
         } else if (v ==ProfileLogo) {
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
         }
     }
+
 //getting facebook data through API call only if the persom doesn't have a profile set up, if they do it
     public void getResponses() {
         FacebookSdk.sdkInitialize(getApplicationContext());
