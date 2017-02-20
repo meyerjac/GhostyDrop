@@ -85,11 +85,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onSwipeRight() {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
             }
 
             public void onSwipeLeft() {
                 Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
             }
         };
         mGestureDetector = new GestureDetector(this, custom_gesture_detector);
@@ -112,12 +114,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == CameraLogo) {
         Intent intent = new Intent(MainActivity.this, PictureActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         } else if (v == SearchLogo) {
             Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
-          startActivity(intent);
+            startActivity(intent);
+            overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
         } else if (v ==ProfileLogo) {
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
         }
     }
 

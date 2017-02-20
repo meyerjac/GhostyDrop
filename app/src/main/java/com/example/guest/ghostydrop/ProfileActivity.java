@@ -37,8 +37,6 @@ import java.io.InputStream;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static com.example.guest.ghostydrop.R.id.bioTextView;
-
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mCurrentUserRef;
     private DatabaseReference SavedPhotoDatabaseRef;
@@ -47,28 +45,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     private static final String TAG = "Debug";
 
-    @Bind(R.id.profilePictureImageView)
-    ImageView ProfilePictureImageView;
-    @Bind(R.id.displayNameTextView)
-    TextView DisplayNameTextView;
-    @Bind(R.id.ageTextView)
-    TextView AgeTextView;
-    @Bind(bioTextView)
-    TextView BioTextView;
-    @Bind(R.id.logoutButton)
-    Button Logout;
-    @Bind(R.id.editProfileButton)
-    Button EditProfileButton;
-    @Bind(R.id.searchLogo)
-    ImageView SearchImageView;
-    @Bind(R.id.profileImageView)
-    ImageView ProfileImageView;
-    @Bind(R.id.headerText)
-    TextView HeaderTextView;
-    @Bind(R.id.socialChunk)
-    RelativeLayout SocialChunk;
-    @Bind(R.id.savedPictureRecyclerView)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.profilePictureImageView) ImageView ProfilePictureImageView;
+    @Bind(R.id.displayNameTextView) TextView DisplayNameTextView;
+    @Bind(R.id.ageTextView) TextView AgeTextView;
+    @Bind(R.id.bioTextView) TextView BioTextView;
+    @Bind(R.id.logoutButton) Button Logout;
+    @Bind(R.id.editProfileButton) Button EditProfileButton;
+    @Bind(R.id.searchLogo) ImageView SearchImageView;
+    @Bind(R.id.profileImageView) ImageView ProfileImageView;
+    @Bind(R.id.headerText) TextView HeaderTextView;
+    @Bind(R.id.socialChunk) RelativeLayout SocialChunk;
+    @Bind(R.id.savedPictureRecyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +66,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         createProfileProgressDialog();
         ProfileProgressDialog.show();
         delayDialog();
-
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
@@ -100,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onSwipeLeft() {
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
             }
         };
         mGestureDetector = new GestureDetector(this, custom_gesture_detector);
@@ -187,6 +174,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
     @Override
@@ -198,10 +186,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v == SearchImageView) {
             Intent intent = new Intent(ProfileActivity.this, FindPictureListActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
         } else if (v == HeaderTextView) {
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             startActivity(intent);
-
             overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
         }
     }

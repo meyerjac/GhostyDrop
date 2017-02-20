@@ -65,6 +65,7 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
             public void onSwipeRight() {
                 Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
             }
         };
         mGestureDetector = new GestureDetector(this, custom_gesture_detector);
@@ -129,12 +130,15 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
         if (v  == ProfileImageView) {
             Intent intent = new Intent(FindPictureListActivity.this, ProfileActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
         } else if (v == HeaderText) {
             Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
         } else if (v == CameraLogo) {
             Intent intent = new Intent(FindPictureListActivity.this, PictureActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }
     }
 }

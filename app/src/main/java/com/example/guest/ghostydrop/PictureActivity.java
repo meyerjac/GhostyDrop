@@ -216,6 +216,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 pushRef.setValue(picture);
 
                 Intent intent = new Intent(PictureActivity.this, MainActivity.class);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 startActivity(intent);
             }
         }
