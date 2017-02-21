@@ -35,33 +35,24 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static com.example.guest.ghostydrop.R.id.iconImage;
-import static com.example.guest.ghostydrop.R.id.imageView;
-
 public class PictureActivity extends AppCompatActivity implements  View.OnClickListener {
-
     private String TAG = "Picture Activity";
     private static final int REQUEST_IMAGE_CAPTURE = 111;
     private LocationManager locationManager;
     private LocationListener listener;
-    private String Latitude;
-    private String Longitude;
+    private String Latitude = "";
+    private String Longitude = "";
     private String imageEncoded;
     private String CommentLine;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private DatabaseReference mPhotosRef;
 
-    @Bind(imageView)
-    ImageView mImageView;
-    @Bind(iconImage)
-    ImageView mIcon;
-    @Bind(R.id.commentText)
-    TextView mCommentText;
-    @Bind(R.id.ghostDrop)
-    Button mGhostDrop;
-    @Bind(R.id.action_photo)
-    Button mAction_Photo;
+    @Bind(R.id.imageView) ImageView mImageView;
+    @Bind(R.id.iconImage) ImageView mIcon;
+    @Bind(R.id.commentText) TextView mCommentText;
+    @Bind(R.id.ghostDrop) Button mGhostDrop;
+    @Bind(R.id.action_photo) Button mAction_Photo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,8 +62,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mPhotosRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
 
-        Latitude = "";
-        Longitude = "";
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
 

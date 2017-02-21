@@ -31,34 +31,27 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
     private ProgressDialog loadPictureProgressDialog;
     private GestureDetector mGestureDetector;
 
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
-    @Bind(R.id.profileImageView)
-    ImageView ProfileImageView;
-    @Bind(R.id.headerText)
-    TextView HeaderText;
-    @Bind(R.id.cameraLogo)
-    ImageView CameraLogo;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    @Bind(R.id.profileImageView) ImageView ProfileImageView;
+    @Bind(R.id.headerText) TextView HeaderText;
+    @Bind(R.id.cameraLogo) ImageView CameraLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_picture_list);
         ButterKnife.bind(this);
+        HeaderText.setOnClickListener(this);
+        ProfileImageView.setOnClickListener(this);
+        CameraLogo.setOnClickListener(this);
+
         createLoadPictureProgressDialog();
         loadPictureProgressDialog.show();
         delayDialog();
+        getLocationExtras();
 
-
-        Intent intent = getIntent();
-        Longitude = intent.getStringExtra("long");
-        Latitude = intent.getStringExtra("la");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
         setUpFirebaseAdapter();
-
-        HeaderText.setOnClickListener((View.OnClickListener) this);
-        ProfileImageView.setOnClickListener((View.OnClickListener) this);
-        CameraLogo.setOnClickListener((View.OnClickListener) this);
 
         Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
             @Override
@@ -69,6 +62,12 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
             }
         };
         mGestureDetector = new GestureDetector(this, custom_gesture_detector);
+    }
+
+    private void getLocationExtras() {
+        Intent intent = getIntent();
+        Longitude = intent.getStringExtra("long");
+        Latitude = intent.getStringExtra("la");
     }
 
     //responsible for touch events, handles them
@@ -83,7 +82,7 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
     }
 
     private void delayDialog() {
-        //3 second delay for the progress dialog
+        //2 second delay for the progress dialog
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -92,6 +91,7 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
         }, 2000);
     }
 
+    //sets dialog box that shows on load of this activity
     private void createLoadPictureProgressDialog() {
         loadPictureProgressDialog = new ProgressDialog(this);
         loadPictureProgressDialog.setTitle("Loading...");
@@ -99,6 +99,7 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
         loadPictureProgressDialog.setCancelable(false);
     }
 
+    //sets firebase adapter to proper data
     private void setUpFirebaseAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, FirebaseAllPhotosViewHolder>
                 (Picture.class, R.layout.photo_list_item, FirebaseAllPhotosViewHolder.class,
@@ -111,18 +112,9 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
                 viewHolder.bindPicture(model);
             }
         };
-
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
-
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.cleanup();
     }
 
     @Override
@@ -140,5 +132,12 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }
+    }
+
+    //onActivity end, this is called
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.cleanup();
     }
 }

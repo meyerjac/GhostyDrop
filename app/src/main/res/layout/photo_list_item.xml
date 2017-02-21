@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@color/com_facebook_likeview_text_color"
@@ -29,19 +30,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="82dp">
-
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:text="Collect"
-                android:id="@+id/collectPhoto"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="10sp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
 
             <TextView
                 android:text=""
@@ -80,6 +68,31 @@
                 android:layout_above="@+id/distanceTextView"
                 android:layout_toRightOf="@+id/postOwnerNameTextView"
                 android:layout_marginLeft="10dp"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/star64"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/uncollectedStar"
+                android:background="@android:color/transparent"
+                android:visibility="visible"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/staryellow"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/collectedStar"
+                android:background="@android:color/transparent"
+                android:visibility="invisible"
+                />
+
+
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

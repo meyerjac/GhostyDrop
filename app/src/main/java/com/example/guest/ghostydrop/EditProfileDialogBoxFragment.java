@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class EditProfileDialogBoxFragment extends DialogFragment {
     private DatabaseReference mUserRef;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -25,6 +24,8 @@ public class EditProfileDialogBoxFragment extends DialogFragment {
 
         Button cancelButton = (Button) rootView.findViewById(R.id.cancelButton);
         Button submitButton = (Button) rootView.findViewById(R.id.postButton);
+
+        //gets userReference to the current user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
         mUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
@@ -40,7 +41,6 @@ public class EditProfileDialogBoxFragment extends DialogFragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 EditText Bio = (EditText) rootView.findViewById(R.id.bioEditTextView);
                 String bio = Bio.getText().toString();
                 mUserRef.child("bio").setValue(bio);
@@ -50,7 +50,6 @@ public class EditProfileDialogBoxFragment extends DialogFragment {
                 EditText Email = (EditText) rootView.findViewById(R.id.emailEditTextView);
                 String email = Email.getText().toString();
                 mUserRef.child("email").setValue(email);
-
                 dismiss();
             }
         });

@@ -40,19 +40,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GestureDetector mGestureDetector;
     private String facebookData;
 
-    @Bind(cameraLogo)
-    ImageView CameraLogo;
-    @Bind(R.id.searchLogo)
-    ImageView SearchLogo;
-    @Bind(R.id.profileImageView)
-    ImageView ProfileLogo;
+    @Bind(cameraLogo) ImageView CameraLogo;
+    @Bind(R.id.searchLogo) ImageView SearchLogo;
+    @Bind(R.id.profileImageView) ImageView ProfileLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        SearchLogo.setOnClickListener(this);
+        CameraLogo.setOnClickListener(this);
+        ProfileLogo.setOnClickListener(this);
 
+        //references
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
         mUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
@@ -75,10 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        SearchLogo.setOnClickListener(this);
-        CameraLogo.setOnClickListener(this);
-        ProfileLogo.setOnClickListener(this);
-
         //Gesture handler, this is where every action is handled
         Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
             @Override
@@ -100,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //responsible for touch events, handles them
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (0 == 0) {
+        if (true) {
             mGestureDetector.onTouchEvent(event);
             return super.onTouchEvent(event);
         } else {
@@ -126,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//getting facebook data through API call only if the persom doesn't have a profile set up, if they do it
+//making Facebook API call only if the person doesn't have a profile set up, if they do it
     public void getResponses() {
         FacebookSdk.sdkInitialize(getApplicationContext());
         new GraphRequest(
@@ -151,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String firstName = "";
             String lastName = "";
             String displayName = "";
-            String bio = "Insert awesome bio for your friends to see!";
-            String birthday = "10000";
+            String bio = "Insert awesome bio for your everyone to see, also imclude some fun facts about you!";
+            String birthday = "25";
             String email = "";
             String facebookId = "";
             String picture = "";
@@ -172,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject picturePicture = facebookJSON.getJSONObject("picture");
                 JSONObject pictureData = picturePicture.getJSONObject("data");
             picture = pictureData.getString("url");
-
             Profile profile = new Profile(firstName, lastName, displayName, bio, birthday, email, facebookId, picture);
             mUserRef.setValue(profile);
 

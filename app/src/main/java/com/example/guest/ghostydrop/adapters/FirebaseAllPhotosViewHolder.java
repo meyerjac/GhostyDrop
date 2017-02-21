@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +20,7 @@ import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +38,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
     private DatabaseReference PhotoOwnerRef;
-    private DatabaseReference mCurrentUserRef;
+    private DatabaseReference UserRef;
     private String mLat;
     private String mLong;
     View mView;
@@ -58,12 +59,51 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         Log.d(TAG, "bindPicture: " + mLat);
         Log.d(TAG, "bindPicture: " + mLong);
 
+        //checking to see if user has already collected that photo
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        UserRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_USER)
+                .child(uid);
+
+        UserRef.child("collectedPhotos").orderByChild("caption").equalTo("hey there is garret").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                if (dataSnapshot.exists()); {
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+            // ...
+        });
+
 
         final TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
         ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
-        Button CollectPhoto = (Button) mView.findViewById(R.id.collectPhoto);
+        ImageButton star = (ImageButton) mView.findViewById(R.id.imageButton);
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -72,21 +112,14 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
             }
         });
 
-        CollectPhoto.setOnClickListener(new View.OnClickListener() {
+        star.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String uid = user.getUid();
-
-                DatabaseReference UserRef = FirebaseDatabase
-                        .getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_USER)
-                        .child(uid).child("collectedPhotos");
-
-                DatabaseReference pushRef = UserRef.push();
+                DatabaseReference pushRef = UserRef.child("collectedPhotos").push();
                 String pushId = pushRef.getKey();
                 picture.setPushId(pushId);
                 pushRef.setValue(picture);
+
             }
 
         });
