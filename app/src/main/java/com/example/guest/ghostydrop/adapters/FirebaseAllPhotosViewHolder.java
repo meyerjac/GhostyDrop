@@ -69,7 +69,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 if (dataSnapshot.exists()); {
-
+//write if statement here
                 }
             }
 
