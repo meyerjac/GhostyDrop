@@ -25,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -37,6 +38,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
     private DatabaseReference PhotoOwnerRef;
+    private DatabaseReference UserSavedPicturesRef;
     private DatabaseReference UserRef;
     private String mLat;
     private String mLong;
@@ -96,13 +98,27 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
 
         });
         YellowStar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
+                DatabaseReference exactPictureClickedonViaQuery = UserRef.child("collectedPhotos");
+                final Query commentQuery = exactPictureClickedonViaQuery.orderByChild("caption").equalTo(picture.getCaption());
+                commentQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
+                            DSnapshot.getRef().removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "onCancelled", databaseError.toException());
+                    }
+                });
+
                 YellowStar.setVisibility(View.INVISIBLE);
                 WhiteStar.setVisibility(View.VISIBLE);
 
             }
-
         });
         WhiteHeart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
