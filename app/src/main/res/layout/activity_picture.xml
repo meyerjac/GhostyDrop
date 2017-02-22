@@ -16,7 +16,7 @@
         android:alpha="0.1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ghostbusters"
+        app:srcCompat="@mipmap/ghosticon"
         android:id="@+id/iconImage"
         android:visibility="visible"
         android:layout_alignParentTop="true"

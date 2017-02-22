@@ -31,6 +31,8 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.example.guest.ghostydrop.R.mipmap.star;
+
 
 public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final String TAG = "Debug";
@@ -103,7 +105,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
         ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
-        ImageButton star = (ImageButton) mView.findViewById(R.id.imageButton);
+        ImageButton WhiteStar = (ImageButton) mView.findViewById(R.id.whiteStarImageButton);
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -112,7 +114,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
             }
         });
 
-        star.setOnClickListener(new View.OnClickListener() {
+        WhiteStar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 DatabaseReference pushRef = UserRef.child("collectedPhotos").push();
