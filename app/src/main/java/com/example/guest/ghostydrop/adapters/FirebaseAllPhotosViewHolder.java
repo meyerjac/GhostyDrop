@@ -29,9 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import static com.example.guest.ghostydrop.R.mipmap.star;
 
 
 public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -50,8 +47,6 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
-
     }
 
     public void bindPicture(final Picture picture) {
@@ -60,6 +55,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
         Log.d(TAG, "bindPicture: " + mLat);
         Log.d(TAG, "bindPicture: " + mLong);
+
 
         //checking to see if user has already collected that photo
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -101,19 +97,22 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         });
 
 
-        final TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
+        TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
         ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
-        ImageButton WhiteStar = (ImageButton) mView.findViewById(R.id.whiteStarImageButton);
+        final ImageButton WhiteStar = (ImageButton) mView.findViewById(R.id.whiteStarImageButton);
+        final ImageButton YellowStar = (ImageButton) mView.findViewById(R.id.yellowStarImageButton);
+        final ImageButton WhiteHeart = (ImageButton) mView.findViewById(R.id.whiteHeartImageButton);
+        final ImageButton RedHeart = (ImageButton) mView.findViewById(R.id.redHeartImageButton);
+        final ImageButton WhiteFlag = (ImageButton) mView.findViewById(R.id.whiteFlagImageButton);
+        final ImageButton RedFlag = (ImageButton) mView.findViewById(R.id.redFlagImageButton);
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
-            {
-                Log.d("Debug", "onClick: owner name");
-            }
-        });
+            { }
 
+        });
         WhiteStar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -122,9 +121,60 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
                 picture.setPushId(pushId);
                 pushRef.setValue(picture);
 
+                YellowStar.setVisibility(View.VISIBLE);
+                WhiteStar.setVisibility(View.INVISIBLE);
+
             }
 
         });
+        YellowStar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                YellowStar.setVisibility(View.INVISIBLE);
+                WhiteStar.setVisibility(View.VISIBLE);
+
+            }
+
+        });
+        WhiteHeart.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                WhiteHeart.setVisibility(View.INVISIBLE);
+                RedHeart.setVisibility(View.VISIBLE);
+
+            }
+
+        });
+        RedHeart.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                WhiteHeart.setVisibility(View.VISIBLE);
+                RedHeart.setVisibility(View.INVISIBLE);
+
+            }
+
+        });
+        WhiteFlag.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                WhiteFlag.setVisibility(View.INVISIBLE);
+                RedFlag.setVisibility(View.VISIBLE);
+
+            }
+
+        });
+
+        RedFlag.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                WhiteFlag.setVisibility(View.VISIBLE);
+                RedFlag.setVisibility(View.INVISIBLE);
+
+            }
+
+        });
+
+
         Typeface typeface = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
                 "fonts/Roboto-Regular.ttf");
         Typeface typeface2 = Typeface.createFromAsset( PhotoComment.getContext().getAssets(),
@@ -148,7 +198,6 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
                     .centerCrop()
                     .into(Image);
         }
-
         PhotoComment.setText(picture.getCaption());
         String postUid = picture.getOwnerUid();
                 //retreiving photo owner uid
@@ -195,23 +244,27 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
 
 
     @Override
-    public void onClick(View v)  {
-        final ArrayList<Picture> pictures = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void onClick(View v) {
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    pictures.add(snapshot.getValue(Picture.class));
-                }
-            }
+        //Not quite sure what this code was preparing for, but it doesnt seem to be used
+        // in my photo view holder and was confesting my Overridded clickView, which I needed
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
+
+//        final ArrayList<Picture> pictures = new ArrayList<>();
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PHOTOS);
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    pictures.add(snapshot.getValue(Picture.class));
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+        };
 }
 
 

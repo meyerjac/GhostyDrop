@@ -6,7 +6,6 @@
     android:background="@color/com_facebook_likeview_text_color"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
-    android:layout_marginBottom="15dp"
     android:weightSum="1">
 
     <ImageView
@@ -29,7 +28,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:layout_weight="8.50">
+            android:layout_weight="8.50"
+            >
 
             <TextView
                 android:text=""
