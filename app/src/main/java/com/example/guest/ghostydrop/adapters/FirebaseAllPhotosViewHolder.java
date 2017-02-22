@@ -65,38 +65,6 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
                 .getReference(Constants.FIREBASE_CHILD_USER)
                 .child(uid);
 
-        UserRef.child("collectedPhotos").orderByChild("caption").equalTo("hey there is garret").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                if (dataSnapshot.exists()); {
-//write if statement here
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-            // ...
-        });
-
-
         TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
         final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
@@ -183,6 +151,39 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         PhotoComment.setTypeface(typeface);
         OwnerName.setTypeface(typeface);
         DistanceText.setTypeface(typeface2);
+
+        UserRef.child("collectedPhotos").orderByChild("caption").equalTo(picture.getCaption()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                if (dataSnapshot.exists()); {
+                    YellowStar.setVisibility(View.VISIBLE);
+                    WhiteStar.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+            // ...
+        });
+
 
         if (!picture.getImageUrl().contains("http")) {
             try {
