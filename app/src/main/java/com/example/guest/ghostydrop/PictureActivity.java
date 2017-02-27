@@ -72,7 +72,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 Latitude = String.valueOf(location.getLatitude());
                 Longitude = String.valueOf(location.getLongitude());
                 addToSharedPreferences(Latitude, Longitude);
-
             }
 
             @Override
@@ -177,7 +176,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 Toast.makeText(PictureActivity.this, "GPS not activated, please wait 3 seconds before trying again", Toast.LENGTH_LONG).show();
                 return;
             }
-
             if (CommentLine.equals("")) {
                 Toast.makeText(PictureActivity.this, "Please add a caption to this picture, Thanks Ghoster", Toast.LENGTH_LONG).show();
                 return;

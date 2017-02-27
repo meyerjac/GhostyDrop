@@ -31,6 +31,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
+import static android.util.Log.d;
+
 
 public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final String TAG = "Debug";
@@ -40,6 +42,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
     private DatabaseReference PhotoOwnerRef;
     private DatabaseReference UserSavedPicturesRef;
     private DatabaseReference UserRef;
+    private DatabaseReference mPhotosRef;
     private String mLat;
     private String mLong;
     View mView;
@@ -55,17 +58,15 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
         mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
-        Log.d(TAG, "bindPicture: " + mLat);
-        Log.d(TAG, "bindPicture: " + mLong);
-
 
         //checking to see if user has already collected that photo
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
+        final String uid = user.getUid();
         UserRef = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_USER)
                 .child(uid);
+        mPhotosRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
 
         TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
@@ -106,6 +107,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
                             DSnapshot.getRef().removeValue();
+                            d(TAG, picture.getPushId());
                         }
                     }
 
@@ -121,23 +123,42 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
             }
         });
         WhiteHeart.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                WhiteHeart.setVisibility(View.INVISIBLE);
-                RedHeart.setVisibility(View.VISIBLE);
+            public void onClick(View v) {
+                DatabaseReference exactPictureClickedonViaQuery = mPhotosRef.child(picture.getPushId()).child("likes").push();
+                String pushId = exactPictureClickedonViaQuery.getKey();
+                picture.setPushId(pushId);
+                exactPictureClickedonViaQuery.setValue(uid);
+
+                            WhiteHeart.setVisibility(View.INVISIBLE);
+                            RedHeart.setVisibility(View.VISIBLE);
 
             }
 
         });
+
         RedHeart.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                WhiteHeart.setVisibility(View.VISIBLE);
-                RedHeart.setVisibility(View.INVISIBLE);
+            public void onClick(View v) {
+                DatabaseReference exactPictureClickedonViaQuery = mPhotosRef.child(picture.getPushId()).child("likes");
+                exactPictureClickedonViaQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
+                            DSnapshot.getRef().removeValue();
 
+                            WhiteHeart.setVisibility(View.VISIBLE);
+                            RedHeart.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "onCancelled", databaseError.toException());
+                    }
+                });
             }
 
         });
+
         WhiteFlag.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {

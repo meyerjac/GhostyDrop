@@ -153,7 +153,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String email = "";
             String facebookId = "";
             String picture = "";
-
+            String latitude = "";
+            String longitude = "";
+            Boolean firstLogin = true;
 
             String jsonData = facebookData;
             if (jsonData == null) {
@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject picturePicture = facebookJSON.getJSONObject("picture");
                 JSONObject pictureData = picturePicture.getJSONObject("data");
             picture = pictureData.getString("url");
-            Profile profile = new Profile(firstName, lastName, displayName, bio, birthday, email, facebookId, picture);
+            Profile profile = new Profile(firstName, lastName, displayName, bio, birthday, email, facebookId, longitude, latitude, firstLogin, picture);
             mUserRef.setValue(profile);
 
         } catch (JSONException e) {
