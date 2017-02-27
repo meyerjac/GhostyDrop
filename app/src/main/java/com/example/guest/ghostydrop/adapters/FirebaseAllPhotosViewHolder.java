@@ -1,6 +1,7 @@
 package com.example.guest.ghostydrop.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
+import com.example.guest.ghostydrop.ProfileActivity;
 import com.example.guest.ghostydrop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,9 +82,12 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
         final ImageButton RedFlag = (ImageButton) mView.findViewById(R.id.redFlagImageButton);
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            { }
-
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ProfileActivity.class);
+                intent.putExtra("notMyUid", picture.getPushId());
+                Log.d(TAG, "onClick: " + picture.getPushId());
+                mContext.startActivity(intent);
+            }
         });
         WhiteStar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -94,10 +99,10 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
 
                 YellowStar.setVisibility(View.VISIBLE);
                 WhiteStar.setVisibility(View.INVISIBLE);
-
             }
 
         });
+
         YellowStar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 DatabaseReference exactPictureClickedonViaQuery = UserRef.child("collectedPhotos");
@@ -116,21 +121,13 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
                         Log.e(TAG, "onCancelled", databaseError.toException());
                     }
                 });
-
                 YellowStar.setVisibility(View.INVISIBLE);
                 WhiteStar.setVisibility(View.VISIBLE);
-
             }
         });
+
         WhiteHeart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DatabaseReference exactPictureClickedonViaQuery = mPhotosRef.child(picture.getPushId()).child("likes").push();
-                String pushId = exactPictureClickedonViaQuery.getKey();
-                picture.setPushId(pushId);
-                exactPictureClickedonViaQuery.setValue(uid);
-
-                            WhiteHeart.setVisibility(View.INVISIBLE);
-                            RedHeart.setVisibility(View.VISIBLE);
 
             }
 
@@ -138,25 +135,10 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
 
         RedHeart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DatabaseReference exactPictureClickedonViaQuery = mPhotosRef.child(picture.getPushId()).child("likes");
-                exactPictureClickedonViaQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
-                            DSnapshot.getRef().removeValue();
 
-                            WhiteHeart.setVisibility(View.VISIBLE);
-                            RedHeart.setVisibility(View.INVISIBLE);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "onCancelled", databaseError.toException());
-                    }
-                });
+                WhiteHeart.setVisibility(View.VISIBLE);
+                RedHeart.setVisibility(View.INVISIBLE);
             }
-
         });
 
         WhiteFlag.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +156,6 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
             {
                 WhiteFlag.setVisibility(View.VISIBLE);
                 RedFlag.setVisibility(View.INVISIBLE);
-
             }
 
         });
