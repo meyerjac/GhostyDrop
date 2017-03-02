@@ -2,10 +2,14 @@ package com.example.guest.ghostydrop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -42,13 +46,18 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
         callbackManager = CallbackManager.Factory.create();
 
         loginButton = (LoginButton) findViewById(R.id.loginButton);
+        final TextView GhostDropText = (TextView) findViewById(R.id.welcomeTextView);
+        final TextView GhostDropText2 = (TextView) findViewById(R.id.welcomeTextView2);
+        final TextView GhostDropText3 = (TextView) findViewById(R.id.welcomeTextView3);
+
+        GhostDropText.setVisibility(View.INVISIBLE);
+        GhostDropText2.setVisibility(View.INVISIBLE);
+        GhostDropText3.setVisibility(View.INVISIBLE);
 
         loginButton.setReadPermissions(Arrays.asList("email"));
-
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -76,7 +85,65 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
-    }
+
+        final Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadein);
+                GhostDropText.startAnimation(fadeIn);
+            }
+        }, 100);
+
+        final Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation fadeAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadeout);
+                GhostDropText.startAnimation(fadeAnimation);
+
+            }
+        }, 1100);
+
+        final Handler handler3 = new Handler();
+        handler3.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadein);
+                GhostDropText2.startAnimation(fadeIn);
+
+            }
+        }, 900);
+        final Handler handler4 = new Handler();
+        handler4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation staythenslide = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadeout);
+                GhostDropText2.startAnimation(staythenslide);
+
+            }
+        }, 1900);
+
+    final Handler handler5 = new Handler();
+    handler5.postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadein);
+            GhostDropText3.startAnimation(fadeIn);
+
+        }
+    }, 1800);
+    final Handler handler6 = new Handler();
+    handler6.postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            Animation staythenslide = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadeout);
+            GhostDropText3.startAnimation(staythenslide);
+
+        }
+    }, 2800);
+}
+
 
     private void handleFacebookAccessToken(AccessToken accessToken) {
         progressBar.setVisibility(View.VISIBLE);

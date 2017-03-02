@@ -51,7 +51,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:text="Photo description"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_alignParentTop="true"
                 android:layout_above="@+id/distanceTextView"
                 android:layout_toRightOf="@+id/postOwnerNameTextView"
@@ -63,7 +63,7 @@
                 android:text="distance away"
                 android:id="@+id/distanceTextView"
                 android:textSize="20dp"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

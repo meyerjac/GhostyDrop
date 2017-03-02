@@ -4,7 +4,7 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.example.guest.ghostydrop.LoginActivity">
 
 
@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
-        android:text="  connect_with_facebook"
+        android:text="connect_with_facebook"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:layout_marginRight="30dp"
@@ -32,13 +32,44 @@
 
     <TextView
         android:text="GhostDrop"
-      android:background="@color/colorPrimaryBackground"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/welcomeTextView"
         android:textSize="60sp"
         android:padding="2dp"
-    android:gravity="center"
-        android:alpha=".5" />
+        android:gravity="center"
+        android:alpha=".2"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/progressBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="GhostDrop"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/welcomeTextView3"
+        android:textSize="60sp"
+        android:padding="2dp"
+        android:gravity="center"
+        android:alpha=".2"
+        android:layout_above="@+id/loginButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="GhostDrop"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/welcomeTextView2"
+        android:textSize="60sp"
+        android:padding="2dp"
+        android:gravity="center"
+        android:alpha=".2"
+        android:layout_below="@+id/loginButton"
+        android:layout_toRightOf="@+id/progressBar"
+        android:layout_toEndOf="@+id/progressBar"
+        android:layout_marginTop="64dp" />
+
 </RelativeLayout>
 
