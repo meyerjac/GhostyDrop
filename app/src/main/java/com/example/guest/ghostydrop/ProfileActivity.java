@@ -160,7 +160,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(DataSnapshot dataSnapshot) {
                 DisplayNameTextView.setText(dataSnapshot.child("displayName").getValue().toString());
                 BioTextView.setText(dataSnapshot.child("bio").getValue().toString());
-                AgeTextView.setText(dataSnapshot.child("birthday").getValue().toString() + "years old");
+                AgeTextView.setText(dataSnapshot.child("birthday").getValue().toString() + " years old");
                 String profilePictureURL = dataSnapshot.child("picture").getValue().toString();
                 new DownloadImageTask((ImageView) findViewById(R.id.profilePictureImageView))
                         .execute(profilePictureURL);

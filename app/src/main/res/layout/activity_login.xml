@@ -39,6 +39,7 @@
         android:padding="2dp"
         android:gravity="center"
         android:alpha=".2"
+        android:textColor="@color/colorPrimary"
         android:layout_marginTop="36dp"
         android:layout_below="@+id/progressBar"
         android:layout_alignParentLeft="true"
@@ -49,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/welcomeTextView3"
+        android:textColor="@color/colorPrimary"
         android:textSize="60sp"
         android:padding="2dp"
         android:gravity="center"
@@ -66,6 +68,7 @@
         android:padding="2dp"
         android:gravity="center"
         android:alpha=".2"
+        android:textColor="@color/colorPrimary"
         android:layout_below="@+id/loginButton"
         android:layout_toRightOf="@+id/progressBar"
         android:layout_toEndOf="@+id/progressBar"
@@ -75,6 +78,7 @@
         android:text="GhostDrop"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/welcomeTextView4"
         android:textSize="60sp"
         android:padding="2dp"
@@ -84,6 +88,36 @@
         android:layout_above="@+id/loginButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/exploreRelativeLayoutBox">
+
+
+        <Button
+            android:text="Explore"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="22dp"
+            android:id="@+id/exploreButton"
+            android:background="@drawable/green_button_box"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:text="New to GhostDrop?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="36dp"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/textView" />
+    </RelativeLayout>
 
 </RelativeLayout>
 

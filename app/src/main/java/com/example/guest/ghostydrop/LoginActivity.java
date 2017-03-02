@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,11 +54,14 @@ public class LoginActivity extends AppCompatActivity {
         final TextView GhostDropText2 = (TextView) findViewById(R.id.welcomeTextView2);
         final TextView GhostDropText3 = (TextView) findViewById(R.id.welcomeTextView3);
         final TextView GhostDropText4 = (TextView) findViewById(R.id.welcomeTextView4);
+        final RelativeLayout LearnBox = (RelativeLayout) findViewById(R.id.exploreRelativeLayoutBox);
+
 
         GhostDropText.setVisibility(View.INVISIBLE);
         GhostDropText2.setVisibility(View.INVISIBLE);
         GhostDropText3.setVisibility(View.INVISIBLE);
         GhostDropText4.setVisibility(View.INVISIBLE);
+        LearnBox.setVisibility(View.INVISIBLE);
 
         loginButton.setReadPermissions(Arrays.asList("email"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -105,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 GhostDropText.startAnimation(fadeAnimation);
 
             }
-        }, 1100);
+        }, 700);
 
         final Handler handler3 = new Handler();
         handler3.postDelayed(new Runnable() {
@@ -124,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                 GhostDropText2.startAnimation(staythenslide);
 
             }
-        }, 1500);
+        }, 1100);
 
     final Handler handler5 = new Handler();
     handler5.postDelayed(new Runnable() {
@@ -134,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             GhostDropText3.startAnimation(fadeIn);
 
         }
-    }, 1000);
+    }, 900);
     final Handler handler6 = new Handler();
     handler6.postDelayed(new Runnable() {
         @Override
@@ -143,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
             GhostDropText3.startAnimation(staythenslide);
 
         }
-    }, 2000);
+    }, 1500);
         final Handler handler7 = new Handler();
         handler7.postDelayed(new Runnable() {
             @Override
@@ -152,7 +156,18 @@ public class LoginActivity extends AppCompatActivity {
                 GhostDropText4.startAnimation(slowfadein);
                 GhostDropText4.setVisibility(View.VISIBLE);
             }
-        }, 2600);
+        }, 1500);
+
+        final Handler handler8 = new Handler();
+        handler8.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation slideUp = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.move_up_slow);
+                LearnBox.startAnimation(slideUp);
+                LearnBox.setVisibility(View.VISIBLE);
+
+            }
+        }, 1000);
 }
 
 
@@ -177,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
+        overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
     }
 
     @Override

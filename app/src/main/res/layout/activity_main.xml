@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlue"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.example.guest.ghostydrop.MainActivity">
 
 
@@ -14,7 +14,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:id="@+id/top_bar"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -87,7 +87,7 @@
             android:layout_marginTop="10dp"
             android:text="• Ghosty Drop is a gamified social media, allowing you to 'drop photos' all over the natural world that other people can find!"
             android:textSize="18dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorText"
             android:layout_marginLeft="20dp" />
         <TextView
             android:id="@+id/bullet2"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:lineSpacingExtra="3sp"
             android:layout_marginTop="20dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorText"
             android:text="• Take a picture, add a comment, and your facebook friends will be notified when you are close to a picture they dropped"
             android:textSize="18dp"
             android:layout_below="@+id/bullet1"
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:lineSpacingExtra="3sp"
             android:layout_marginTop="20dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorText"
             android:text="• The discover feature will find pictures that other people have dropped, have fun!!!"
             android:textSize="18dp"
             android:layout_below="@+id/bullet2"
