@@ -52,10 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         final TextView GhostDropText = (TextView) findViewById(R.id.welcomeTextView);
         final TextView GhostDropText2 = (TextView) findViewById(R.id.welcomeTextView2);
         final TextView GhostDropText3 = (TextView) findViewById(R.id.welcomeTextView3);
+        final TextView GhostDropText4 = (TextView) findViewById(R.id.welcomeTextView4);
 
         GhostDropText.setVisibility(View.INVISIBLE);
         GhostDropText2.setVisibility(View.INVISIBLE);
         GhostDropText3.setVisibility(View.INVISIBLE);
+        GhostDropText4.setVisibility(View.INVISIBLE);
 
         loginButton.setReadPermissions(Arrays.asList("email"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -113,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                 GhostDropText2.startAnimation(fadeIn);
 
             }
-        }, 900);
+        }, 500);
         final Handler handler4 = new Handler();
         handler4.postDelayed(new Runnable() {
             @Override
@@ -122,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 GhostDropText2.startAnimation(staythenslide);
 
             }
-        }, 1900);
+        }, 1500);
 
     final Handler handler5 = new Handler();
     handler5.postDelayed(new Runnable() {
@@ -132,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
             GhostDropText3.startAnimation(fadeIn);
 
         }
-    }, 1800);
+    }, 1000);
     final Handler handler6 = new Handler();
     handler6.postDelayed(new Runnable() {
         @Override
@@ -141,7 +143,16 @@ public class LoginActivity extends AppCompatActivity {
             GhostDropText3.startAnimation(staythenslide);
 
         }
-    }, 2800);
+    }, 2000);
+        final Handler handler7 = new Handler();
+        handler7.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation slowfadein = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.slowwwfadein);
+                GhostDropText4.startAnimation(slowfadein);
+                GhostDropText4.setVisibility(View.VISIBLE);
+            }
+        }, 2600);
 }
 
 

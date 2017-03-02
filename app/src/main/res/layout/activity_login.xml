@@ -71,5 +71,19 @@
         android:layout_toEndOf="@+id/progressBar"
         android:layout_marginTop="64dp" />
 
+    <TextView
+        android:text="GhostDrop"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/welcomeTextView4"
+        android:textSize="60sp"
+        android:padding="2dp"
+        android:gravity="center"
+        android:alpha=".6"
+        android:layout_marginBottom="52dp"
+        android:layout_above="@+id/loginButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
 
