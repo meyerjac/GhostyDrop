@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/com_facebook_likeview_text_color"
+    android:background="@color/colorPrimaryDark"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
     android:weightSum="1">
@@ -17,13 +17,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="15.75" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:layout_height="match_parent"
-        android:padding="4dp"
-        android:weightSum="1">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -136,5 +129,4 @@
 
 
         </RelativeLayout>
-    </LinearLayout>
 </LinearLayout>

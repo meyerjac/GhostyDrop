@@ -5,8 +5,7 @@
     android:id="@+id/activity_discover"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.example.guest.ghostydrop.FindPictureListActivity">
 
     <RelativeLayout
@@ -15,7 +14,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:id="@+id/top_bar"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -72,6 +71,14 @@
         android:id="@+id/cameraLogo"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_centerInParent="true"
+        android:id="@+id/horizLine2"
+        android:layout_above="@id/cameraLogo"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
