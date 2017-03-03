@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String firstName = "";
             String lastName = "";
             String displayName = "";
-            String bio = "Insert awesome bio for your everyone to see, also imclude some fun facts about you!";
+            String bio = "Insert awesome bio for your everyone to see, also include some fun facts about you!";
             String birthday = "25";
             String email = "";
             String facebookId = "";

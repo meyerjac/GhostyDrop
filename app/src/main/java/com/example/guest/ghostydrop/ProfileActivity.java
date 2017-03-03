@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -37,6 +39,8 @@ import java.io.InputStream;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.example.guest.ghostydrop.R.id.savedPictureRecyclerView;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private DatabaseReference mCurrentUserRef;
     private DatabaseReference SavedPhotoDatabaseRef;
@@ -49,13 +53,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.displayNameTextView) TextView DisplayNameTextView;
     @Bind(R.id.ageTextView) TextView AgeTextView;
     @Bind(R.id.bioTextView) TextView BioTextView;
+    @Bind(R.id.textView2) TextView TextView2;
     @Bind(R.id.logoutButton) Button Logout;
     @Bind(R.id.editProfileButton) Button EditProfileButton;
     @Bind(R.id.searchLogo) ImageView SearchImageView;
     @Bind(R.id.profileImageView) ImageView ProfileImageView;
     @Bind(R.id.headerText) TextView HeaderTextView;
+    @Bind(savedPictureRecyclerView) RecyclerView mRecyclerView;
     @Bind(R.id.socialChunk) RelativeLayout SocialChunk;
-    @Bind(R.id.savedPictureRecyclerView) RecyclerView mRecyclerView;
+    @Bind(R.id.editLogoutRelativeLayout) RelativeLayout EditLogoutRelativeLayout;
+    @Bind(R.id.were) RelativeLayout Were;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +154,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void run() {
                 ProfileProgressDialog.dismiss();
             }
-        }, 1500);
+        }, 2500);
     }
 
     private void fillProfileData() {
@@ -165,6 +174,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 new DownloadImageTask((ImageView) findViewById(R.id.profilePictureImageView))
                         .execute(profilePictureURL);
                 SocialChunk.setVisibility(View.VISIBLE);
+                Were.setVisibility(View.VISIBLE);
+                EditLogoutRelativeLayout.setVisibility(View.VISIBLE);
 
             }
 
@@ -190,14 +201,89 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             FragmentManager fm = getFragmentManager();
             EditProfileDialogBoxFragment editProfDialogBox = new EditProfileDialogBoxFragment();
                 editProfDialogBox.show(fm, "dialog is shown");
-        } else if (v == SearchImageView) {
-            Intent intent = new Intent(ProfileActivity.this, FindPictureListActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+
         } else if (v == HeaderTextView) {
-            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+
+            final Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideLeft = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.viewslideleft);
+                    SocialChunk.startAnimation(slideLeft);
+                    SocialChunk.setVisibility(View.INVISIBLE);
+
+                }
+            }, 100);
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideLeft = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.viewslideleft);
+                    Were.startAnimation(slideLeft);
+                    Were.setVisibility(View.INVISIBLE);
+                }
+            }, 300);
+            final Handler handler3 = new Handler();
+            handler3.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideLeft = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.viewslideleft);
+                    EditLogoutRelativeLayout.startAnimation(slideLeft);
+                    EditLogoutRelativeLayout.setVisibility(View.INVISIBLE);
+                }
+            }, 500);
+            final Handler handler4 = new Handler();
+            handler4.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+
+                }
+            }, 800);
+
+
+        } else if (v == SearchImageView) {
+            final Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideLeft = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.viewslideleft);
+                    SocialChunk.startAnimation(slideLeft);
+                    SocialChunk.setVisibility(View.INVISIBLE);
+
+                }
+            }, 100);
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideLeft = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.viewslideleft);
+                    Were.startAnimation(slideLeft);
+                    Were.setVisibility(View.INVISIBLE);
+                }
+            }, 300);
+            final Handler handler3 = new Handler();
+            handler3.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideLeft = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.viewslideleft);
+                    EditLogoutRelativeLayout.startAnimation(slideLeft);
+                    EditLogoutRelativeLayout.setVisibility(View.INVISIBLE);
+
+                }
+            }, 500);
+            final Handler handler4 = new Handler();
+            handler4.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(ProfileActivity.this, FindPictureListActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+
+                }
+            }, 800);
         }
     }
 

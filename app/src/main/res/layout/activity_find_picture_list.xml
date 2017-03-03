@@ -87,7 +87,6 @@
         android:layout_below="@+id/top_bar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/cameraLogo"
-        />
+        android:layout_above="@+id/horizLine2" />
 
 </RelativeLayout>
