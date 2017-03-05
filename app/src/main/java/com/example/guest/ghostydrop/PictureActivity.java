@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -18,6 +19,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +53,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
 
     @Bind(R.id.imageView) ImageView mImageView;
     @Bind(R.id.iconImage) ImageView mIcon;
+    @Bind(R.id.pacmanImage) ImageView PacmanImage;
     @Bind(R.id.commentText) TextView mCommentText;
     @Bind(R.id.ghostDrop) Button mGhostDrop;
     @Bind(R.id.action_photo) Button mAction_Photo;
@@ -92,6 +96,24 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
 
         configure_button();
         mGhostDrop.setOnClickListener(this);
+        final Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation fadeIn = AnimationUtils.loadAnimation(PictureActivity.this, R.anim.fadein);
+                mIcon.startAnimation(fadeIn);
+            }
+        }, 100);
+
+        final Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation fadeAnimation = AnimationUtils.loadAnimation(PictureActivity.this, R.anim.fadein);
+                PacmanImage.startAnimation(fadeAnimation);
+
+            }
+        }, 300);
     }
 
     private void addToSharedPreferences(String Latitude, String Longitude) {

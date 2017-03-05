@@ -130,24 +130,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         }, 1100);
 
-    final Handler handler5 = new Handler();
-    handler5.postDelayed(new Runnable() {
-        @Override
-        public void run() {
-            Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadein);
-            GhostDropText3.startAnimation(fadeIn);
+        final Handler handler5 = new Handler();
+        handler5.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadein);
+                GhostDropText3.startAnimation(fadeIn);
 
-        }
-    }, 900);
-    final Handler handler6 = new Handler();
-    handler6.postDelayed(new Runnable() {
-        @Override
-        public void run() {
-            Animation staythenslide = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadeout);
-            GhostDropText3.startAnimation(staythenslide);
+            }
+        }, 900);
+        final Handler handler6 = new Handler();
+        handler6.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation staythenslide = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fadeout);
+                GhostDropText3.startAnimation(staythenslide);
 
-        }
-    }, 1500);
+            }
+        }, 1500);
         final Handler handler7 = new Handler();
         handler7.postDelayed(new Runnable() {
             @Override
@@ -168,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         }, 1000);
-}
+    }
 
 
     private void handleFacebookAccessToken(AccessToken accessToken) {

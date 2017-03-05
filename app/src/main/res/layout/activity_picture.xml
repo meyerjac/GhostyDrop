@@ -9,11 +9,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.example.guest.ghostydrop.PictureActivity">
 
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green_button_box"
+        android:id="@+id/commentText"
+        android:hint="add caption"
+        android:visibility="invisible"
+        android:padding="10dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginTop="7dp" />
+
     <ImageView
-        android:alpha="0.1"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+        android:visibility="invisible"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/pacmanImage"
+        android:layout_toEndOf="@+id/pacmanImage" />
+
+    <ImageView
+        android:alpha="0.3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ghosticon"
@@ -26,63 +49,47 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-        android:visibility="invisible"
-        android:id="@+id/imageView"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="32dp"
-        android:layout_marginEnd="32dp" />
-
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:id="@+id/commentText"
-        android:hint="add a caption!"
-        android:layout_weight="3"
-        android:visibility="invisible"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_below="@+id/action_photo"
+        android:alpha="0.3"
+        app:srcCompat="@drawable/pacman"
+        android:id="@+id/pacmanImage"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="18dp" />
-
-    <Button
-        android:text="Submit Photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:alpha="1.2"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:id="@+id/ghostDrop"
-        android:textColor="@color/colorAccent"
-        android:visibility="invisible"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp" />
+        android:layout_marginBottom="6dp" />
 
     <Button
         android:text="Create Ghost"
         android:alpha="1.2"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:textSize="18dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/green_button_box"
         android:id="@+id/action_photo"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/ghostDrop"
-        android:layout_alignStart="@+id/ghostDrop" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Submit Photo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:alpha="1.2"
+        android:id="@+id/ghostDrop"
+        android:textSize="17dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:padding="10dp"
+        android:layout_below="@+id/action_photo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="9dp" />
 
 
 </RelativeLayout>

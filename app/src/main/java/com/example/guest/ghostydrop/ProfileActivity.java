@@ -83,6 +83,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 //            ProfileProgressDialog.show();
 //            delayDialog();
 //        }
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         mCurrentUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
@@ -158,6 +159,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void fillProfileData() {
+        createProfileProgressDialog();
+        ProfileProgressDialog.show();
+        delayDialog();
+        SocialChunk.setVisibility(View.VISIBLE);
+        Were.setVisibility(View.VISIBLE);
+        EditLogoutRelativeLayout.setVisibility(View.VISIBLE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         mCurrentUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
@@ -173,10 +180,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 String profilePictureURL = dataSnapshot.child("picture").getValue().toString();
                 new DownloadImageTask((ImageView) findViewById(R.id.profilePictureImageView))
                         .execute(profilePictureURL);
-                SocialChunk.setVisibility(View.VISIBLE);
-                Were.setVisibility(View.VISIBLE);
-                EditLogoutRelativeLayout.setVisibility(View.VISIBLE);
-
             }
 
             @Override

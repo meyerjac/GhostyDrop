@@ -20,12 +20,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="100dp"
             android:layout_weight="8.50"
             >
 
             <TextView
-                android:text=""
+                android:text="kalsdjf ;sakjdfsadfasdf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -36,30 +36,6 @@
                 android:layout_alignParentStart="true"
                 android:id="@+id/postOwnerNameTextView"
                 android:hapticFeedbackEnabled="true" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/photoCommentTextView"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="Photo description"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_alignParentTop="true"
-                android:layout_above="@+id/distanceTextView"
-                android:layout_toRightOf="@+id/postOwnerNameTextView"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="25dp"
-                android:text="distance away"
-                android:id="@+id/distanceTextView"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -126,6 +102,30 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:visibility="invisible"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:text="distance away"
+                android:id="@+id/distanceTextView"
+                android:textSize="20dp"
+                android:textColor="@color/colorWhite"
+                android:layout_below="@+id/photoCommentTextView"
+                android:layout_toRightOf="@+id/postOwnerNameTextView"
+                android:layout_toEndOf="@+id/postOwnerNameTextView" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/photoCommentTextView"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Photo description"
+                android:textColor="@color/colorWhite"
+                android:layout_below="@+id/postOwnerNameTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
 
 
         </RelativeLayout>

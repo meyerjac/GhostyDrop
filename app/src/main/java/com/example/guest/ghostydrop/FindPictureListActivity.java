@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -119,10 +121,34 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        if (v  == ProfileImageView) {
-            Intent intent = new Intent(FindPictureListActivity.this, ProfileActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
+        if (v  == ProfileImageView) {final Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideRight = AnimationUtils.loadAnimation(FindPictureListActivity.this, R.anim.viewsslideright);
+                    mRecyclerView.startAnimation(slideRight);
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+
+                }
+            }, 100);
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation slideRight2 = AnimationUtils.loadAnimation(FindPictureListActivity.this, R.anim.viewsslideright);
+                    CameraLogo.startAnimation(slideRight2);
+                    CameraLogo.setVisibility(View.INVISIBLE);
+                }
+            }, 300);
+            final Handler handler3 = new Handler();
+            handler3.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(FindPictureListActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
+                }
+            }, 500);
         } else if (v == HeaderText) {
             Intent intent = new Intent(FindPictureListActivity.this, MainActivity.class);
             startActivity(intent);

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#2b2c30</color>
     <color name="colorText">#ededed</color>
     <color name="colorAccent">#719cc6</color>
-    <color name="colorWhite">#fff</color>
+    <color name="colorWhite">#F2FFFF  </color>
     <color name="colorNegative">#cb2027</color>
     <color name="colorBlue">#32506d</color>
 </resources>
