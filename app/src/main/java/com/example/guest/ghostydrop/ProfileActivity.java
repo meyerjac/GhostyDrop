@@ -94,6 +94,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         EditProfileButton.setOnClickListener(this);
         HeaderTextView.setOnClickListener(this);
         SearchImageView.setOnClickListener(this);
+        SocialChunk.setVisibility(View.INVISIBLE);
+        Were.setVisibility(View.INVISIBLE);
+        EditLogoutRelativeLayout.setVisibility(View.INVISIBLE);
 
         //Gesture handler, this is where every action is handled
         Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
@@ -106,6 +109,34 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         };
         mGestureDetector = new GestureDetector(this, custom_gesture_detector);
 
+        final Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation moveUp = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.move_up_slow);
+                SocialChunk.startAnimation(moveUp);
+                SocialChunk.setVisibility(View.VISIBLE);
+
+            }
+        }, 100);
+        final Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation moveUp = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.move_up_slow);
+                Were.startAnimation(moveUp);
+                Were.setVisibility(View.VISIBLE);
+            }
+        }, 300);
+        final Handler handler3 = new Handler();
+        handler3.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation moveUp = AnimationUtils.loadAnimation(ProfileActivity.this, R.anim.move_up_slow);
+                EditLogoutRelativeLayout.startAnimation(moveUp);
+                EditLogoutRelativeLayout.setVisibility(View.VISIBLE);
+            }
+        }, 600);
 
     }
 
@@ -144,7 +175,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private void createProfileProgressDialog() {
         ProfileProgressDialog = new ProgressDialog(this);
         ProfileProgressDialog.setTitle("Loading...");
-        ProfileProgressDialog.setMessage("Generating your profile...");
+        ProfileProgressDialog.setMessage("Generating profile...");
         ProfileProgressDialog.setCancelable(false);
     }
 

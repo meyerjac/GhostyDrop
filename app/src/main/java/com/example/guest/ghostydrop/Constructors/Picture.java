@@ -1,8 +1,6 @@
 package com.example.guest.ghostydrop.Constructors;
 
 
-import java.util.ArrayList;
-
 //this is my constructor for every picture that is taken with my app will contain these properties//
 public class Picture {
     String caption;
@@ -10,20 +8,18 @@ public class Picture {
     String latitude;
     String longitude;
     String ownerUid;
-    ArrayList<String> comments;
     private String pushId;
 
     //constructore with no arguments
     public Picture() {
     }
 
-    public Picture(String caption, String imageUrl, String latitude, String longitude, String ownerUid, ArrayList<String> comments) {
+    public Picture(String caption, String imageUrl, String latitude, String longitude, String ownerUid) {
         this.caption = caption;
         this.imageUrl = imageUrl;
         this.latitude = latitude;
         this.longitude = longitude;
         this.ownerUid = ownerUid;
-        this.comments = comments;
     }
 
     public String getCaption() {
@@ -44,10 +40,6 @@ public class Picture {
 
     public String getOwnerUid() {
         return ownerUid;
-    }
-
-    public ArrayList<String> getComments() {
-        return comments;
     }
 
     public String getPushId() {

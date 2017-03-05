@@ -72,16 +72,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="375dp"
-        android:id="@+id/recyclerView"
-        android:layout_above="@+id/horizLine1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"/>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -90,5 +80,16 @@
         android:layout_above="@+id/cameraLogo"
         android:layout_alignRight="@+id/top_bar"
         android:layout_alignEnd="@+id/top_bar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="525dp"
+        android:id="@+id/recyclerView"
+        android:layout_marginTop="5dp"
+        android:layout_above="@+id/horizLine1"
+        android:layout_below="@id/top_bar"
+        android:layout_alignLeft="@+id/top_bar"
+        android:layout_alignStart="@+id/top_bar"
+        android:layout_marginBottom="6dp" />
 
 </RelativeLayout>

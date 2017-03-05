@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.example.guest.ghostydrop.R.id.recyclerView;
+
 public class FindPictureListActivity extends AppCompatActivity implements View.OnClickListener{
     public String Latitude;
     public String Longitude;
@@ -33,10 +35,11 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
     private ProgressDialog loadPictureProgressDialog;
     private GestureDetector mGestureDetector;
 
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    @Bind(recyclerView) RecyclerView mRecyclerView;
     @Bind(R.id.profileImageView) ImageView ProfileImageView;
     @Bind(R.id.headerText) TextView HeaderText;
     @Bind(R.id.cameraLogo) ImageView CameraLogo;
+    @Bind(R.id.horizLine1) View HorizLine1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
         HeaderText.setOnClickListener(this);
         ProfileImageView.setOnClickListener(this);
         CameraLogo.setOnClickListener(this);
+        CameraLogo.setVisibility(View.INVISIBLE);
+        HorizLine1.setVisibility(View.INVISIBLE);
 
         createLoadPictureProgressDialog();
         loadPictureProgressDialog.show();
@@ -64,6 +69,18 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
             }
         };
         mGestureDetector = new GestureDetector(this, custom_gesture_detector);
+        final Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation moveUp = AnimationUtils.loadAnimation(FindPictureListActivity.this, R.anim.move_up_slow);
+                CameraLogo.startAnimation(moveUp);
+                CameraLogo.setVisibility(View.VISIBLE);
+                HorizLine1.startAnimation(moveUp);
+                HorizLine1.setVisibility(View.VISIBLE);
+
+            }
+        }, 300);
     }
 
     private void getLocationExtras() {
@@ -121,7 +138,9 @@ public class FindPictureListActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        if (v  == ProfileImageView) {final Handler handler1 = new Handler();
+        if (v  == ProfileImageView) {
+
+            final Handler handler1 = new Handler();
             handler1.postDelayed(new Runnable() {
                 @Override
                 public void run() {

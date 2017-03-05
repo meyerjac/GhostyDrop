@@ -70,50 +70,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="250dp"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp">
-
-        <TextView
-            android:id="@+id/bullet1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="3sp"
-            android:layout_marginTop="10dp"
-            android:text="• Ghosty Drop is a gamified social media, allowing you to 'drop photos' all over the natural world that other people can find!"
-            android:textSize="18dp"
-            android:textColor="@color/colorText"
-            android:layout_marginLeft="20dp" />
-        <TextView
-            android:id="@+id/bullet2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="3sp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/colorText"
-            android:text="• Take a picture, add a comment, and your facebook friends will be notified when you are close to a picture they dropped"
-            android:textSize="18dp"
-            android:layout_below="@+id/bullet1"
-            android:layout_marginLeft="20dp" />
-        <TextView
-            android:id="@+id/bullet3"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="3sp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/colorText"
-            android:text="• The discover feature will find pictures that other people have dropped, have fun!!!"
-            android:textSize="18dp"
-            android:layout_below="@+id/bullet2"
-            android:layout_marginLeft="20dp" />
-
-    </RelativeLayout>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -131,5 +87,41 @@
         android:layout_alignRight="@+id/top_bar"
         android:layout_alignEnd="@+id/top_bar"
         android:id="@+id/imageView4" />
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/top_bar"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/bullet2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3sp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorText"
+            android:text="• Take a picture, add a comment, and other users are able to collect, like, or comment on those photos those photos"
+            android:textSize="18dp"
+            android:layout_below="@+id/bullet1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/bullet1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3sp"
+            android:text="• This is my final project demonstrating my programming skillset!"
+            android:textSize="18dp"
+            android:textColor="@color/colorText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
 </RelativeLayout>
 

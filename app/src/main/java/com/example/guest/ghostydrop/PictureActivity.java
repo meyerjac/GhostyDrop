@@ -33,7 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -195,7 +194,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
         if (v == mGhostDrop) {
             CommentLine = mCommentText.getText().toString();
             if ((Longitude == "") || (Latitude == "")) {
-                Toast.makeText(PictureActivity.this, "GPS not activated, please wait 3 seconds before trying again", Toast.LENGTH_LONG).show();
+                Toast.makeText(PictureActivity.this, "you haven't taken a picture or we are getting your location", Toast.LENGTH_LONG).show();
                 return;
             }
             if (CommentLine.equals("")) {
@@ -209,10 +208,6 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
                 String pictureURL = imageEncoded;
                 String latitude = Latitude;
                 String longitude = Longitude;
-                ArrayList<String> comments = new ArrayList<String>();
-                {{
-                    comments.add("0");
-                }}
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 assert user != null;
@@ -220,7 +215,7 @@ public class PictureActivity extends AppCompatActivity implements  View.OnClickL
 
                 DatabaseReference pushRef = mPhotosRef.push();
                 String pushId = pushRef.getKey();
-                Picture picture = new Picture(caption, pictureURL, latitude, longitude, ownerUid, comments);
+                Picture picture = new Picture(caption, pictureURL, latitude, longitude, ownerUid);
                 picture.setPushId(pushId);
                 pushRef.setValue(picture);
 

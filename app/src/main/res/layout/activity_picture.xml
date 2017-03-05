@@ -18,6 +18,7 @@
         android:background="@drawable/green_button_box"
         android:id="@+id/commentText"
         android:hint="add caption"
+        android:maxLength="85"
         android:visibility="invisible"
         android:padding="10dp"
         android:layout_below="@+id/imageView"

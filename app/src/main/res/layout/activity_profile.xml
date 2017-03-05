@@ -124,33 +124,6 @@ android:background="@color/colorPrimaryDark"
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="245dp"
-        android:layout_below="@+id/socialChunk"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/were">
-
-        <TextView
-            android:text="Collected Photos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorText"
-            android:textSize="30dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/textView2" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/savedPictureRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
 android:layout_width="match_parent"
 android:layout_height="40dp"
     android:id="@+id/editLogoutRelativeLayout"
@@ -183,5 +156,31 @@ android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="22dp"
         android:layout_marginEnd="22dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:id="@+id/were"
+        android:layout_below="@+id/socialChunk"
+        android:layout_above="@+id/editLogoutRelativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Collected Photos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textSize="30dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView2" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/savedPictureRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:gravity="center"
+          android:layout_below="@id/textView2" />
     </RelativeLayout>
 </RelativeLayout>
