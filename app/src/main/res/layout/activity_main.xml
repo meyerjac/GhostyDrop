@@ -70,58 +70,70 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
+    <TextView
+        android:text="Android Studio IDE, animations, gestures, BaaS/Firebase, Facebook login, Facebook Graph API, object oriented programming, camera access, Geo-Location, and excellent UI."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/back"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/top_bar"
-        android:layout_alignStart="@+id/top_bar"
-        android:id="@+id/imageView3" />
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textSize="18dp"
+        android:id="@+id/projectTechnologies2"
+        android:layout_below="@+id/projectTechnologies"
+        android:layout_centerHorizontal="true" />
 
-    <ImageView
+    <TextView
+        android:text="I led a team at Portland Startup Weekend 2016. I hustle to get where I want to be. I can solve tough problems and find innovative solutions. I love people. I love tech. I am semi-funny."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/next"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_alignRight="@+id/top_bar"
-        android:layout_alignEnd="@+id/top_bar"
-        android:id="@+id/imageView4" />
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textSize="18dp"
+        android:id="@+id/whyMe2"
+        android:layout_marginTop="9dp"
+        android:layout_below="@+id/whyMe"
+        />
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:gravity="center"
-        android:layout_marginTop="14dp"
+    <TextView
+        android:text="Project Purpose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30dp"
+        android:id="@+id/projectPurpose"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/top_bar"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/bullet2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="3sp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorText"
-            android:text="• Take a picture, add a comment, and other users are able to collect, like, or comment on those photos those photos"
-            android:textSize="18dp"
-            android:layout_below="@+id/bullet1"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+    <TextView
+        android:text="Project Technologies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/projectTechnologies"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/projectPurpose2"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/bullet1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="3sp"
-            android:text="• This is my final project demonstrating my programming skillset!"
-            android:textSize="18dp"
-            android:textColor="@color/colorText"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+    <TextView
+        android:text="Why Me!?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/whyMe"
+        android:layout_below="@+id/projectTechnologies2"
+        android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
+    <TextView
+        android:text="I wanted to challenge myself and show my programming skills."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:id="@+id/projectPurpose2"
+        android:layout_below="@+id/projectPurpose"
+        android:layout_alignLeft="@+id/projectTechnologies2"
+        android:layout_alignStart="@+id/projectTechnologies2" />
+
 </RelativeLayout>
 

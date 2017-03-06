@@ -8,7 +8,7 @@ android:id="@+id/baseLayout">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="444dp"
+        android:layout_height="300dp"
         android:id="@+id/form"
         android:background="@color/colorBlue"
      android:layout_marginTop="30dp"
@@ -26,10 +26,12 @@ android:id="@+id/baseLayout">
             android:layout_marginBottom="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:id="@+id/postButton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/cancelButton" />
 
         <Button
             android:text="Cancel"
@@ -39,25 +41,15 @@ android:id="@+id/baseLayout">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cancelButton"
+            android:layout_marginLeft="5dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             />
 
-        <TextView
-            android:text="Edit Profile Information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:id="@+id/textView"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/colorAccent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <EditText
             android:hint="enter Bio of how amazing you are!"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_margin="10dp"
             android:background="@color/cardview_light_background"
             android:id="@+id/bioEditTextView"
@@ -67,20 +59,6 @@ android:id="@+id/baseLayout">
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="22dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/emailEditTextView"
-            android:text=""
-            android:textColor="@color/colorAccent"
-            android:hint="email address"
-            android:layout_marginBottom="30dp"
-            android:layout_above="@+id/postButton"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
         <EditText
             android:layout_width="50dp"
@@ -101,6 +79,29 @@ android:id="@+id/baseLayout">
             android:layout_alignBottom="@+id/ageEditTextView"
             android:layout_toLeftOf="@+id/ageEditTextView"
             android:layout_toStartOf="@+id/ageEditTextView" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/emailEditTextView"
+            android:text=""
+            android:textColor="@color/colorAccent"
+            android:hint="email address"
+            android:layout_above="@+id/postButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Edit Profile Information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:id="@+id/textView"
+            android:textColor="@color/colorAccent"
+            android:layout_above="@+id/ageEditTextView"
+            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>

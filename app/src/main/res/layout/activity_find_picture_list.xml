@@ -74,8 +74,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimary"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"
         android:id="@+id/horizLine1"
         android:layout_above="@+id/cameraLogo"
         android:layout_alignRight="@+id/top_bar"

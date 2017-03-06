@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.location.Location;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,13 +59,6 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
                 Log.d("Debug", "onClick: owner name");
             }
         });
-
-        Typeface typeface = Typeface.createFromAsset( PhotoComment.getContext().getAssets(), "fonts/Roboto-Regular.ttf");
-        Typeface typeface2 = Typeface.createFromAsset( PhotoComment.getContext().getAssets(), "fonts/Walkway_Oblique_Bold.ttf");
-
-        PhotoComment.setTypeface(typeface);
-        OwnerName.setTypeface(typeface);
-        DistanceText.setTypeface(typeface2);
 
         if (!picture.getImageUrl().contains("http")) {
             try {

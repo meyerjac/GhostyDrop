@@ -3,22 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/picturebox"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    android:paddingBottom="10dp"
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
         android:id="@+id/photoImageView"
         android:src="@mipmap/arrows"
+        android:layout_marginTop="15dp"
         android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"
         android:layout_weight="15.75" />
 
 
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="8.50">
@@ -29,6 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:textColor="@color/colorPrimary"
@@ -36,74 +40,8 @@
                 android:id="@+id/postOwnerNameTextView"
                 android:hapticFeedbackEnabled="true" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/starwhite"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/whiteStarImageButton"
-                android:background="@android:color/transparent"
-                android:visibility="visible" />
-
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@mipmap/star"
-                android:id="@+id/yellowStarImageButton"
-                android:background="@android:color/transparent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignRight="@+id/whiteStarImageButton"
-                android:layout_alignEnd="@+id/whiteStarImageButton"
-                android:visibility="invisible"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/likewhite"
-                android:id="@+id/whiteHeartImageButton"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@android:color/transparent"
-                android:visibility="visible"/>
-
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@mipmap/heartred"
-                android:id="@+id/redHeartImageButton"
-                android:background="@android:color/transparent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/whiteHeartImageButton"
-                android:layout_alignStart="@+id/whiteHeartImageButton"
-                android:visibility="invisible"/>
-
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/flagwhite"
-                android:id="@+id/whiteFlagImageButton"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:background="@android:color/transparent"
-                android:visibility="visible"/>
-
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@mipmap/flagred"
-                android:id="@+id/redFlagImageButton"
-                android:background="@android:color/transparent"
-                android:layout_alignTop="@+id/yellowStarImageButton"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:visibility="invisible"/>
-
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="120dp"
                 android:layout_height="25dp"
                 android:text="distance away"
                 android:id="@+id/distanceTextView"
@@ -113,17 +51,95 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="3dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@mipmap/starwhite"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:id="@+id/whiteStarImageButton"
+                            android:background="@android:color/transparent"
+                            android:visibility="visible" />
+
+                        <ImageButton
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            app:srcCompat="@mipmap/star"
+                            android:id="@+id/yellowStarImageButton"
+                            android:background="@android:color/transparent"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignRight="@+id/whiteStarImageButton"
+                            android:layout_alignEnd="@+id/whiteStarImageButton"
+                            android:visibility="invisible"/>
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@mipmap/likewhite"
+                            android:id="@+id/whiteHeartImageButton"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@android:color/transparent"
+                            android:visibility="visible"/>
+
+                        <ImageButton
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            app:srcCompat="@mipmap/heartred"
+                            android:id="@+id/redHeartImageButton"
+                            android:background="@android:color/transparent"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignLeft="@+id/whiteHeartImageButton"
+                            android:layout_alignStart="@+id/whiteHeartImageButton"
+                            android:visibility="invisible"/>
+
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@mipmap/flagwhite"
+                            android:id="@+id/whiteFlagImageButton"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:background="@android:color/transparent"
+                            android:visibility="visible"/>
+
+                        <ImageButton
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            app:srcCompat="@mipmap/flagred"
+                            android:id="@+id/redFlagImageButton"
+                            android:background="@android:color/transparent"
+                            android:layout_alignTop="@+id/yellowStarImageButton"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:visibility="invisible"/>
+            </RelativeLayout>
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:id="@+id/photoCommentTextView"
                 android:textSize="18dp"
                 android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:text="Photo description"
                 android:textColor="@color/colorWhite"
-                android:layout_below="@+id/distanceTextView"
-                android:layout_above="@+id/whiteStarImageButton" />
-
-
+                android:layout_below="@+id/postOwnerNameTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
         </RelativeLayout>
 </LinearLayout>

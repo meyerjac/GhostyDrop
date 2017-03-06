@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -64,13 +65,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.editLogoutRelativeLayout) RelativeLayout EditLogoutRelativeLayout;
     @Bind(R.id.were) RelativeLayout Were;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
+        Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
+        HeaderTextView.setTypeface(ostrichFont);
 
         Intent intent = getIntent();
         String notMyUid = intent.getStringExtra("notMyUid");

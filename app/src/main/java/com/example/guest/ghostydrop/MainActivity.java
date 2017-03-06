@@ -2,12 +2,16 @@ package com.example.guest.ghostydrop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guest.ghostydrop.Constructors.Profile;
@@ -43,6 +47,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(cameraLogo) ImageView CameraLogo;
     @Bind(R.id.searchLogo) ImageView SearchLogo;
     @Bind(R.id.profileImageView) ImageView ProfileLogo;
+    @Bind(R.id.projectPurpose) TextView ProjectPurpose;
+    @Bind(R.id.projectPurpose2) TextView ProjectPurpose2;
+    @Bind(R.id.projectTechnologies) TextView ProjectTechnologies;
+    @Bind(R.id.projectTechnologies2) TextView ProjectTechnologies2;
+    @Bind(R.id.whyMe) TextView WhyMe;
+    @Bind(R.id.whyMe2) TextView WhyMe2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +91,97 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Android_Gesture_Detector custom_gesture_detector = new Android_Gesture_Detector() {
             @Override
             public void onSwipeRight() {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
+                final Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewsslideright);
+                        ProjectPurpose.startAnimation(moveUp);
+                        ProjectPurpose2.startAnimation(moveUp);
+                        ProjectPurpose.setVisibility(View.INVISIBLE);
+                        ProjectPurpose2.setVisibility(View.INVISIBLE);
+
+                    }
+                }, 100);
+                final Handler handler2 = new Handler();
+                handler2.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewsslideright);
+                        ProjectTechnologies.startAnimation(moveUp);
+                        ProjectTechnologies2.startAnimation(moveUp);
+                        ProjectTechnologies.setVisibility(View.INVISIBLE);
+                        ProjectTechnologies2.setVisibility(View.INVISIBLE);
+                    }
+                }, 200);
+                final Handler handler3 = new Handler();
+                handler3.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewsslideright);
+                        WhyMe.startAnimation(moveUp);
+                        WhyMe2.startAnimation(moveUp);
+                        WhyMe.setVisibility(View.INVISIBLE);
+                        WhyMe2.setVisibility(View.INVISIBLE);
+                    }
+                }, 300);
+                final Handler handler4 = new Handler();
+                handler4.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(MainActivity.this,   ProfileActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
+
+                    }
+                }, 400);
             }
 
             public void onSwipeLeft() {
-                Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+                final Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation slideRight = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewslideleft);
+                        ProjectPurpose.startAnimation(slideRight);
+                        ProjectPurpose2.startAnimation(slideRight);
+                        ProjectPurpose.setVisibility(View.INVISIBLE);
+                        ProjectPurpose2.setVisibility(View.INVISIBLE);
+
+                    }
+                }, 100);
+                final Handler handler2 = new Handler();
+                handler2.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation slideRight = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewslideleft);
+                        ProjectTechnologies.startAnimation(slideRight);
+                        ProjectTechnologies2.startAnimation(slideRight);
+                        ProjectTechnologies.setVisibility(View.INVISIBLE);
+                        ProjectTechnologies2.setVisibility(View.INVISIBLE);
+                    }
+                }, 200);
+                final Handler handler3 = new Handler();
+                handler3.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation slideRight = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewslideleft);
+                        WhyMe.startAnimation(slideRight);
+                        WhyMe2.startAnimation(slideRight);
+                        WhyMe.setVisibility(View.INVISIBLE);
+                        WhyMe2.setVisibility(View.INVISIBLE);
+                    }
+                }, 300);
+                final Handler handler4 = new Handler();
+                handler4.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+
+                    }
+                }, 400);
             }
         };
         mGestureDetector = new GestureDetector(this, custom_gesture_detector);
@@ -113,13 +206,95 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         } else if (v == SearchLogo) {
-            Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+            final Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewslideleft);
+                    ProjectPurpose.startAnimation(moveUp);
+                    ProjectPurpose2.startAnimation(moveUp);
+                    ProjectPurpose.setVisibility(View.INVISIBLE);
+                    ProjectPurpose2.setVisibility(View.INVISIBLE);
+
+                }
+            }, 100);
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewslideleft);
+                    ProjectTechnologies.startAnimation(moveUp);
+                    ProjectTechnologies2.startAnimation(moveUp);
+                    ProjectTechnologies.setVisibility(View.INVISIBLE);
+                    ProjectTechnologies2.setVisibility(View.INVISIBLE);
+                }
+            }, 200);
+            final Handler handler3 = new Handler();
+            handler3.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewslideleft);
+                    WhyMe.startAnimation(moveUp);
+                    WhyMe2.startAnimation(moveUp);
+                    WhyMe.setVisibility(View.INVISIBLE);
+                    WhyMe2.setVisibility(View.INVISIBLE);
+                }
+            }, 300);
+            final Handler handler4 = new Handler();
+            handler4.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(MainActivity.this,   FindPictureListActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.pushleftin, R.anim.pushleftout);
+
+                }
+            }, 400);
         } else if (v ==ProfileLogo) {
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
+            final Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewsslideright);
+                    ProjectPurpose.startAnimation(moveUp);
+                    ProjectPurpose2.startAnimation(moveUp);
+                    ProjectPurpose.setVisibility(View.INVISIBLE);
+                    ProjectPurpose2.setVisibility(View.INVISIBLE);
+
+                }
+            }, 100);
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewsslideright);
+                    ProjectTechnologies.startAnimation(moveUp);
+                    ProjectTechnologies2.startAnimation(moveUp);
+                    ProjectTechnologies.setVisibility(View.INVISIBLE);
+                    ProjectTechnologies2.setVisibility(View.INVISIBLE);
+                }
+            }, 200);
+            final Handler handler3 = new Handler();
+            handler3.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation moveUp = AnimationUtils.loadAnimation(MainActivity.this, R.anim.viewsslideright);
+                    WhyMe.startAnimation(moveUp);
+                    WhyMe2.startAnimation(moveUp);
+                    WhyMe.setVisibility(View.INVISIBLE);
+                    WhyMe2.setVisibility(View.INVISIBLE);
+                }
+            }, 300);
+            final Handler handler4 = new Handler();
+            handler4.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(MainActivity.this,   ProfileActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.pushrightin, R.anim.pushrightout);
+
+                }
+            }, 400);
         }
     }
 

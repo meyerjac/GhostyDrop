@@ -179,7 +179,7 @@ android:layout_height="40dp"
         <android.support.v7.widget.RecyclerView
             android:id="@+id/savedPictureRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="310dp"
+            android:layout_height="270dp"
             android:gravity="center"
           android:layout_below="@id/textView2" />
     </RelativeLayout>
