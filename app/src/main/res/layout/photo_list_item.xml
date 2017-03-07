@@ -41,7 +41,7 @@
                 android:hapticFeedbackEnabled="true" />
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="140dp"
                 android:layout_height="25dp"
                 android:text="distance away"
                 android:id="@+id/distanceTextView"

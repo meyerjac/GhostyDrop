@@ -4,22 +4,28 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -30,7 +36,7 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
     private DatabaseReference PhotoOwnerRef;
-    private DatabaseReference mCurrentUserRef;
+    private DatabaseReference UserRef;
     private String mLat;
     private String mLong;
     View mView;
@@ -42,23 +48,43 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
         mContext = itemView.getContext();
     }
 
+
+
     public void bindPicture(final Picture picture) {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
         mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
 
 
-        final TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
-        TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
-        final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
-        ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
+        final TextView PhotoComment = (TextView) mView.findViewById(R.id.photoCommentTextView);
+        TextView DistanceText = (TextView) mView.findViewById(R.id.distanceTextView);
+        final TextView OwnerName = (TextView) mView.findViewById(R.id.postOwnerNameTextView);
+        ImageView Image = (ImageView) mView.findViewById(R.id.photoImageView);
+        final ImageButton WhiteStar = (ImageButton) mView.findViewById(R.id.whiteStarImageButton);
+        final ImageButton YellowStar = (ImageButton) mView.findViewById(R.id.yellowStarImageButton);
+
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+        UserRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_USER)
+                .child(uid);
+
+
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Log.d("Debug", "onClick: owner name");
             }
         });
+
+        Typeface typeface = Typeface.createFromAsset(PhotoComment.getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
+        Typeface typeface2 = Typeface.createFromAsset(OwnerName.getContext().getAssets(), "fonts/Rubik-MediumItalic.ttf");
+
+        PhotoComment.setTypeface(typeface);
+        OwnerName.setTypeface(typeface);
+        DistanceText.setTypeface(typeface2);
 
         if (!picture.getImageUrl().contains("http")) {
             try {
@@ -107,10 +133,62 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
         loc2.setLongitude(lon2);
 
         float distanceInMeters = loc1.distanceTo(loc2);
-        double distanceInMiles=distanceInMeters * 0.000621371;
-        double roundedMiles = (double)Math.round(distanceInMiles * 10d) / 10d;
+        double distanceInMiles = distanceInMeters * 0.000621371;
+        double roundedMiles = (double) Math.round(distanceInMiles * 10d) / 10d;
 
         DistanceText.setText(roundedMiles + " miles away");
+
+        UserRef.child("collectedPhotos").orderByChild("caption").equalTo(picture.getCaption()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                if (dataSnapshot.exists()); {
+                    YellowStar.setVisibility(View.VISIBLE);
+                    WhiteStar.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+            // ...
+        });
+        YellowStar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                DatabaseReference exactPictureClickedonViaQuery = UserRef.child("collectedPhotos");
+                final Query commentQuery = exactPictureClickedonViaQuery.orderByChild("caption").equalTo(picture.getCaption());
+                commentQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
+                            DSnapshot.getRef().removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                YellowStar.setVisibility(View.INVISIBLE);
+                WhiteStar.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
