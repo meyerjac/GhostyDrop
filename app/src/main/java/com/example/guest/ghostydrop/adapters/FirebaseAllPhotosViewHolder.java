@@ -35,6 +35,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 
 import static android.util.Log.d;
+import static com.example.guest.ghostydrop.R.id.numberOfLikes;
 
 
 public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -73,6 +74,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
 
         TextView PhotoComment = (TextView) mView.findViewById(R.id. photoCommentTextView);
         TextView DistanceText= (TextView) mView.findViewById(R.id.distanceTextView);
+        final TextView NumberOfLikes= (TextView) mView.findViewById(numberOfLikes);
         final TextView OwnerName= (TextView) mView.findViewById(R.id.postOwnerNameTextView);
         ImageView Image= (ImageView) mView.findViewById(R.id.photoImageView);
         final ImageButton WhiteStar = (ImageButton) mView.findViewById(R.id.whiteStarImageButton);
@@ -143,7 +145,9 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
 
         RedHeart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DatabaseReference likesRef = mPhotosRef.child("likes");
+                WhiteHeart.setVisibility(View.VISIBLE);
+                RedHeart.setVisibility(View.INVISIBLE);
+                DatabaseReference likesRef = mPhotosRef.child(picture.getPushId()).child("likes");
                 final Query myLikeQuery = likesRef.orderByChild("likeOwnerUid").equalTo(uid);
                 myLikeQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -159,8 +163,6 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
                         Log.e(TAG, "onCancelled", databaseError.toException());
                     }
                 });
-                WhiteHeart.setVisibility(View.VISIBLE);
-                RedHeart.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -223,6 +225,23 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
             }
 
             // ...
+        });
+
+        DatabaseReference pictureRef = mPhotosRef.child(picture.getPushId()).child("likes");
+        pictureRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int size = 0;
+                for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
+                        size++ ;
+                }
+                NumberOfLikes.setText(Integer.toString(size));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
         });
 
 

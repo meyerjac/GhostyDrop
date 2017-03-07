@@ -125,6 +125,15 @@
                     android:layout_alignTop="@+id/whiteFlagImageButton"
                     android:layout_alignLeft="@+id/whiteFlagImageButton"
                     android:layout_alignStart="@+id/whiteFlagImageButton" />
+
+                <TextView
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberOfLikes"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/redHeartImageButton"
+                    android:layout_toStartOf="@+id/redHeartImageButton" />
             </RelativeLayout>
 
             <TextView
