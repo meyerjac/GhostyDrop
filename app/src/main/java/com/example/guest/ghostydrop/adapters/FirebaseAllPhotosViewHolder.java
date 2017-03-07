@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
+import com.example.guest.ghostydrop.Constructors.likeObject;
 import com.example.guest.ghostydrop.ProfileActivity;
 import com.example.guest.ghostydrop.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -128,14 +129,36 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder impleme
 
         WhiteHeart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                DatabaseReference pushRef2 = mPhotosRef.child(picture.getPushId()).child("likes").push();
+                String pushId = pushRef2.getKey();
+                likeObject like = new likeObject(uid);
+                like.setPushId(pushId);
+                pushRef2.setValue(like);
 
+                WhiteHeart.setVisibility(View.INVISIBLE);
+                RedHeart.setVisibility(View.VISIBLE);
             }
 
         });
 
         RedHeart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                DatabaseReference likesRef = mPhotosRef.child("likes");
+                final Query myLikeQuery = likesRef.orderByChild("likeOwnerUid").equalTo(uid);
+                myLikeQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
+                            DSnapshot.getRef().removeValue();
+                            Log.d(TAG, picture.getPushId());
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "onCancelled", databaseError.toException());
+                    }
+                });
                 WhiteHeart.setVisibility(View.VISIBLE);
                 RedHeart.setVisibility(View.INVISIBLE);
             }

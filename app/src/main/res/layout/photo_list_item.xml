@@ -72,18 +72,7 @@
                             android:background="@android:color/transparent"
                             android:visibility="visible" />
 
-                        <ImageButton
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            app:srcCompat="@mipmap/star"
-                            android:id="@+id/yellowStarImageButton"
-                            android:background="@android:color/transparent"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignRight="@+id/whiteStarImageButton"
-                            android:layout_alignEnd="@+id/whiteStarImageButton"
-                            android:visibility="invisible"/>
-
-                        <ImageButton
+                <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@mipmap/likewhite"
@@ -93,19 +82,8 @@
                             android:background="@android:color/transparent"
                             android:visibility="visible"/>
 
-                        <ImageButton
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            app:srcCompat="@mipmap/heartred"
-                            android:id="@+id/redHeartImageButton"
-                            android:background="@android:color/transparent"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignLeft="@+id/whiteHeartImageButton"
-                            android:layout_alignStart="@+id/whiteHeartImageButton"
-                            android:visibility="invisible"/>
 
-
-                        <ImageButton
+                <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@mipmap/flagwhite"
@@ -116,16 +94,37 @@
                             android:background="@android:color/transparent"
                             android:visibility="visible"/>
 
-                        <ImageButton
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            app:srcCompat="@mipmap/flagred"
-                            android:id="@+id/redFlagImageButton"
-                            android:background="@android:color/transparent"
-                            android:layout_alignTop="@+id/yellowStarImageButton"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
-                            android:visibility="invisible"/>
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@mipmap/heartred"
+                    android:id="@+id/redHeartImageButton"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"
+                    android:layout_alignTop="@+id/whiteHeartImageButton"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@mipmap/star"
+                    android:id="@+id/yellowStarImageButton"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"
+                    android:layout_alignTop="@+id/whiteStarImageButton"
+                    android:layout_alignRight="@+id/whiteStarImageButton"
+                    android:layout_alignEnd="@+id/whiteStarImageButton" />
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@mipmap/flagred"
+                    android:id="@+id/redFlagImageButton"
+                    android:background="@android:color/transparent"
+                    android:visibility="invisible"
+                    android:layout_alignTop="@+id/whiteFlagImageButton"
+                    android:layout_alignLeft="@+id/whiteFlagImageButton"
+                    android:layout_alignStart="@+id/whiteFlagImageButton" />
             </RelativeLayout>
 
             <TextView
