@@ -1,6 +1,7 @@
 package com.example.guest.ghostydrop.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
+import com.example.guest.ghostydrop.ProfileActivity;
 import com.example.guest.ghostydrop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,12 +33,15 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
+import static com.example.guest.ghostydrop.R.id.numberOfLikes;
+
 public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
     private DatabaseReference PhotoOwnerRef;
     private DatabaseReference UserRef;
+    private DatabaseReference mPhotosRef;
     private String mLat;
     private String mLong;
     View mView;
@@ -48,44 +53,58 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
         mContext = itemView.getContext();
     }
 
-
-
     public void bindPicture(final Picture picture) {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
         mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
 
+        if (picture.getOwnerUid() == null) {
+            Log.d("yo", "no pictures");
+        };
+
 
         final TextView PhotoComment = (TextView) mView.findViewById(R.id.photoCommentTextView);
         TextView DistanceText = (TextView) mView.findViewById(R.id.distanceTextView);
+        final TextView NumberOfLikes = (TextView) mView.findViewById(numberOfLikes);
         final TextView OwnerName = (TextView) mView.findViewById(R.id.postOwnerNameTextView);
         ImageView Image = (ImageView) mView.findViewById(R.id.photoImageView);
         final ImageButton WhiteStar = (ImageButton) mView.findViewById(R.id.whiteStarImageButton);
         final ImageButton YellowStar = (ImageButton) mView.findViewById(R.id.yellowStarImageButton);
+        final ImageButton WhiteHeart = (ImageButton) mView.findViewById(R.id.whiteHeartImageButton);
+        final ImageButton RedHeart = (ImageButton) mView.findViewById(R.id.redHeartImageButton);
+        final ImageButton WhiteFlag = (ImageButton) mView.findViewById(R.id.whiteFlagImageButton);
+        final ImageButton RedFlag = (ImageButton) mView.findViewById(R.id.redFlagImageButton);
+        WhiteHeart.setVisibility(View.INVISIBLE);
+        RedHeart.setVisibility(View.INVISIBLE);
+        WhiteFlag.setVisibility(View.INVISIBLE);
+        RedFlag.setVisibility(View.INVISIBLE);
 
-
+        //user credentials and databaseReferences
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
         UserRef = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_USER)
                 .child(uid);
-
-
+        mPhotosRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
+        PhotoComment.setText(picture.getCaption());
+        String postUid = picture.getOwnerUid();
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("Debug", "onClick: owner name");
+               //navigates to that persons profile Page
             }
         });
 
+        //setting fonts
         Typeface typeface = Typeface.createFromAsset(PhotoComment.getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
         Typeface typeface2 = Typeface.createFromAsset(OwnerName.getContext().getAssets(), "fonts/Rubik-MediumItalic.ttf");
-
         PhotoComment.setTypeface(typeface);
         OwnerName.setTypeface(typeface);
         DistanceText.setTypeface(typeface2);
 
+
+        //checking how to load picture from database
         if (!picture.getImageUrl().contains("http")) {
             try {
                 Bitmap imageBitmap = decodeFromFirebaseBase64(picture.getImageUrl());
@@ -101,9 +120,6 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
                     .into(Image);
         }
 
-        PhotoComment.setText(picture.getCaption());
-        String postUid = picture.getOwnerUid();
-
         //retreiving photo owner uid
         PhotoOwnerRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(postUid);
         PhotoOwnerRef.addValueEventListener(new ValueEventListener() {
@@ -118,25 +134,24 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
+
+        //gets the correct miles from those photos you are currently located
+
         double lat1 = Double.parseDouble(picture.getLatitude());
         double lat2 = Double.parseDouble(mLat);
-
         double lon1 = Double.parseDouble(picture.getLongitude());
         double lon2 = Double.parseDouble(mLong);
-
         Location loc1 = new Location("");
         loc1.setLatitude(lat1);
         loc1.setLongitude(lon1);
-
         Location loc2 = new Location("");
         loc2.setLatitude(lat2);
         loc2.setLongitude(lon2);
-
         float distanceInMeters = loc1.distanceTo(loc2);
         double distanceInMiles = distanceInMeters * 0.000621371;
         double roundedMiles = (double) Math.round(distanceInMiles * 10d) / 10d;
-
         DistanceText.setText(roundedMiles + " miles away");
+
 
         UserRef.child("collectedPhotos").orderByChild("caption").equalTo(picture.getCaption()).addChildEventListener(new ChildEventListener() {
             @Override
@@ -169,6 +184,19 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
 
             // ...
         });
+
+        OwnerName.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (picture.getOwnerUid() == uid) {
+                    Intent intent = new Intent(mContext, ProfileActivity.class);
+                    mContext.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(mContext, ProfileActivity.class);
+                    mContext.startActivity(intent);
+                }
+            }
+        });
+
         YellowStar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 DatabaseReference exactPictureClickedonViaQuery = UserRef.child("collectedPhotos");
@@ -186,7 +214,7 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
                     }
                 });
                 YellowStar.setVisibility(View.INVISIBLE);
-                WhiteStar.setVisibility(View.VISIBLE);
+                WhiteStar.setVisibility(View.INVISIBLE);
             }
         });
     }

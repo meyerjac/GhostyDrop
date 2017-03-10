@@ -84,7 +84,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder {
         final ImageButton RedFlag = (ImageButton) mView.findViewById(R.id.redFlagImageButton);
 
         //loading the pictures with the correct colored star for if it has been collected by that user yet.
-        UserRef.child("collectedPhotos").orderByChild("pushId").equalTo(picture.getPushId()).addListenerForSingleValueEvent(new ValueEventListener() {
+        UserRef.child("collectedPhotos").orderByChild("imageUrl").equalTo(picture.getImageUrl()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {

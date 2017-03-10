@@ -2,6 +2,7 @@ package com.example.guest.ghostydrop;
 
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.adapters.SavedPicturesInProfileViewHolder;
@@ -76,6 +78,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         mCurrentUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
+
+
+        //checking to see if this person hasn't collected photos yet
+            DatabaseReference rootRef = mCurrentUserRef;
+            rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if (!(snapshot.hasChild("collectedPhotos"))) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "No Photos collected yet, Get Collecting!!!";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
         SavedPhotoDatabaseRef = mCurrentUserRef.child("collectedPhotos");
         setUpProfileCollectedPhotosFirebaseAdapter();
 
