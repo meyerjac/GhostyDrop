@@ -73,18 +73,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
         HeaderTextView.setTypeface(ostrichFont);
 
-        Intent intent = getIntent();
-        String notMyUid = intent.getStringExtra("notMyUid");
-//        if (notMyUid.equals(null)) {
-//            Log.d(TAG, "myUID" + notMyUid);
-//        } else {
-//            Log.d(TAG, "elseMyUid" + notMyUid);
-//            //run the code for another profile
-//            createProfileProgressDialog();
-//            ProfileProgressDialog.show();
-//            delayDialog();
-//        }
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         mCurrentUserRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_USER).child(uid);
