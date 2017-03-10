@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guest.ghostydrop.Constructors.Picture;
-import com.example.guest.ghostydrop.adapters.SavedPicturesInProfileViewHolder;
+import com.example.guest.ghostydrop.adapters.MySavedPicturesInProfileViewHolder;
 import com.example.guest.ghostydrop.util.Android_Gesture_Detector;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -167,12 +167,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private void setUpProfileCollectedPhotosFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, SavedPicturesInProfileViewHolder>
-                (Picture.class, R.layout.photo_list_item, SavedPicturesInProfileViewHolder.class,
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, MySavedPicturesInProfileViewHolder>
+                (Picture.class, R.layout.photo_list_item, MySavedPicturesInProfileViewHolder.class,
                         SavedPhotoDatabaseRef) {
 
             @Override
-            protected void populateViewHolder(SavedPicturesInProfileViewHolder viewHolder,
+            protected void populateViewHolder(MySavedPicturesInProfileViewHolder viewHolder,
                                               Picture model, int position) {
 
                 viewHolder.bindPicture(model);

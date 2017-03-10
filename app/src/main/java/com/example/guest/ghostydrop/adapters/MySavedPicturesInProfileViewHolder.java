@@ -10,7 +10,6 @@ import android.location.Location;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,7 +35,7 @@ import java.io.IOException;
 
 import static com.example.guest.ghostydrop.R.id.numberOfLikes;
 
-public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
+public class MySavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
@@ -48,7 +47,7 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
     View mView;
     Context mContext;
 
-    public SavedPicturesInProfileViewHolder(View itemView) {
+    public MySavedPicturesInProfileViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
@@ -58,10 +57,6 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mLat = mSharedPreferences.getString(Constants.LATITUDE, null);
         mLong = mSharedPreferences.getString(Constants.LONGITUDE, null);
-
-        if (picture.getOwnerUid() == null) {
-            Log.d("yo", "no pictures");
-        };
 
 
         final TextView PhotoComment = (TextView) mView.findViewById(R.id.photoCommentTextView);
@@ -89,15 +84,15 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
                 .child(uid);
         mPhotosRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_PHOTOS);
         PhotoComment.setText(picture.getCaption());
-        String postUid = picture.getOwnerUid();
+        final String postUid = picture.getOwnerUid();
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (picture.getOwnerUid().equals(uid)) {
+                if (postUid.equals(uid)) {
                     Intent intent = new Intent(mContext, ProfileActivity.class);
                     mContext.startActivity(intent);
                 } else {
-                    String PersonsProfile = picture.getOwnerUid();
+                    String PersonsProfile = postUid;
                     Intent intent = new Intent(mContext, OtherPersonsProfile.class);
                     intent.putExtra(Constants.USER_UID, picture.getOwnerUid());
                     mContext.startActivity(intent);
@@ -194,18 +189,6 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
             // ...
         });
 
-        OwnerName.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (picture.getOwnerUid() == uid) {
-                    Intent intent = new Intent(mContext, ProfileActivity.class);
-                    mContext.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(mContext, ProfileActivity.class);
-                    mContext.startActivity(intent);
-                }
-            }
-        });
-
         YellowStar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 DatabaseReference exactPictureClickedonViaQuery = UserRef.child("collectedPhotos");
@@ -213,7 +196,7 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
                 commentQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot DSnapshot: dataSnapshot.getChildren()) {
+                        for (DataSnapshot DSnapshot : dataSnapshot.getChildren()) {
                             DSnapshot.getRef().removeValue();
                         }
                     }
@@ -226,7 +209,7 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
                 WhiteStar.setVisibility(View.INVISIBLE);
             }
         });
-    }
+    };
 
     public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
         byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);

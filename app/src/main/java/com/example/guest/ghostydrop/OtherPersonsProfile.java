@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guest.ghostydrop.Constructors.Picture;
-import com.example.guest.ghostydrop.adapters.SavedPicturesInProfileViewHolder;
+import com.example.guest.ghostydrop.adapters.MySavedPicturesInProfileViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +47,7 @@ public class OtherPersonsProfile extends AppCompatActivity implements View.OnCli
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     private ImageView mProfileImageView;
 
+
     @Bind(R.id.profilePictureImageView) ImageView ProfilePictureImageView;
     @Bind(R.id.displayNameTextView) TextView DisplayNameTextView;
     @Bind(R.id.ageTextView) TextView AgeTextView;
@@ -58,6 +59,7 @@ public class OtherPersonsProfile extends AppCompatActivity implements View.OnCli
     @Bind(savedPictureRecyclerView) RecyclerView mRecyclerView;
     @Bind(R.id.socialChunk) RelativeLayout SocialChunk;
     @Bind(R.id.were) RelativeLayout Were;
+
 
 
     @Override
@@ -91,6 +93,7 @@ public class OtherPersonsProfile extends AppCompatActivity implements View.OnCli
         Were.setVisibility(View.INVISIBLE);
 
 
+
         final Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             @Override
@@ -116,12 +119,12 @@ public class OtherPersonsProfile extends AppCompatActivity implements View.OnCli
 
 
     private void setUpProfileCollectedPhotosFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, SavedPicturesInProfileViewHolder>
-                (Picture.class, R.layout.photo_list_item, SavedPicturesInProfileViewHolder.class,
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Picture, MySavedPicturesInProfileViewHolder>
+                (Picture.class, R.layout.photo_list_item, MySavedPicturesInProfileViewHolder.class,
                         TheirSavedPhotoDatabaseRef) {
 
             @Override
-            protected void populateViewHolder(SavedPicturesInProfileViewHolder viewHolder,
+            protected void populateViewHolder(MySavedPicturesInProfileViewHolder viewHolder,
                                               Picture model, int position) {
 
                 viewHolder.bindPicture(model);
