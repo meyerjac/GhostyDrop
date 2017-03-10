@@ -10,7 +10,7 @@ android:id="@+id/baseLayout">
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/form"
-        android:background="@color/colorBlue"
+        android:background="@color/colorPrimaryDark"
      android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="10dp"
@@ -18,56 +18,6 @@ android:id="@+id/baseLayout">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-
-        <Button
-            android:text="Save Info"
-            android:padding="10dp"
-            android:background="@color/colorAccent"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:id="@+id/postButton"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/cancelButton" />
-
-        <Button
-            android:text="Cancel"
-            android:padding="10dp"
-            android:background="@color/colorPrimary"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cancelButton"
-            android:layout_marginLeft="5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            />
-
-        <EditText
-            android:hint="enter Bio of how amazing you are!"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:background="@color/cardview_light_background"
-            android:id="@+id/bioEditTextView"
-            android:textSize="25dp"
-            android:textColor="@color/colorAccent"
-            android:layout_above="@+id/emailEditTextView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="22dp" />
-
-        <EditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/ageEditTextView"
-            android:layout_above="@+id/bioEditTextView"
-            android:layout_centerHorizontal="true" />
 
         <TextView
             android:text="age"
@@ -80,28 +30,74 @@ android:id="@+id/baseLayout">
             android:layout_toLeftOf="@+id/ageEditTextView"
             android:layout_toStartOf="@+id/ageEditTextView" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/emailEditTextView"
-            android:text=""
-            android:textColor="@color/colorAccent"
-            android:hint="email address"
-            android:layout_above="@+id/postButton"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
         <TextView
             android:text="Edit Profile Information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:id="@+id/textView"
             android:textColor="@color/colorAccent"
-            android:layout_above="@+id/ageEditTextView"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="Cancel"
+            android:padding="10dp"
+            android:background="@drawable/green_button_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancelButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/bioEditTextView"
+            android:layout_alignStart="@+id/bioEditTextView" />
+
+        <Button
+            android:text="Save Info"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/postButton"
+            android:layout_alignBaseline="@+id/cancelButton"
+            android:layout_alignBottom="@+id/cancelButton"
+            android:layout_alignRight="@+id/bioEditTextView"
+            android:layout_alignEnd="@+id/bioEditTextView" />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/ageEditTextView"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:hint="enter Bio of how amazing you are!"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/cardview_light_background"
+            android:id="@+id/bioEditTextView"
+            android:textSize="25dp"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="13dp"
+            android:layout_below="@+id/ageEditTextView"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/emailEditTextView"
+            android:text=""
+            android:textColorHint="@color/colorAccent"
+            android:hint="email address"
+            android:layout_below="@+id/bioEditTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
     </RelativeLayout>

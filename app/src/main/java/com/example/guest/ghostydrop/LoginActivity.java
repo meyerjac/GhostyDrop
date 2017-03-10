@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private ProgressBar progressBar;
+    private Button ExploreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         loginButton = (LoginButton) findViewById(R.id.loginButton);
+        ExploreButton = (Button) findViewById(R.id.exploreButton);
         final TextView GhostDropText = (TextView) findViewById(R.id.welcomeTextView);
         final TextView GhostDropText2 = (TextView) findViewById(R.id.welcomeTextView2);
         final TextView GhostDropText3 = (TextView) findViewById(R.id.welcomeTextView3);
@@ -168,6 +171,14 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         }, 1000);
+
+        ExploreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, TutorialActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

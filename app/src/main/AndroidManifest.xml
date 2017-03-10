@@ -43,7 +43,8 @@
             android:name=".ProfileActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".EditProfileDialogBoxFragment" />
-        <activity android:name=".OtherPersonsProfile"></activity>
+        <activity android:name=".OtherPersonsProfile" />
+        <activity android:name=".TutorialActivity"></activity>
     </application>
 
 </manifest>
