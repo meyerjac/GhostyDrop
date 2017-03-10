@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
+import com.example.guest.ghostydrop.OtherPersonsProfile;
 import com.example.guest.ghostydrop.ProfileActivity;
 import com.example.guest.ghostydrop.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -92,7 +93,15 @@ public class SavedPicturesInProfileViewHolder extends RecyclerView.ViewHolder {
 
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               //navigates to that persons profile Page
+                if (picture.getOwnerUid().equals(uid)) {
+                    Intent intent = new Intent(mContext, ProfileActivity.class);
+                    mContext.startActivity(intent);
+                } else {
+                    String PersonsProfile = picture.getOwnerUid();
+                    Intent intent = new Intent(mContext, OtherPersonsProfile.class);
+                    intent.putExtra(Constants.USER_UID, picture.getOwnerUid());
+                    mContext.startActivity(intent);
+                }
             }
         });
 

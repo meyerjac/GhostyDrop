@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.guest.ghostydrop.Constants;
 import com.example.guest.ghostydrop.Constructors.Picture;
 import com.example.guest.ghostydrop.Constructors.likeObject;
+import com.example.guest.ghostydrop.OtherPersonsProfile;
 import com.example.guest.ghostydrop.ProfileActivity;
 import com.example.guest.ghostydrop.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,6 +44,7 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_HEIGHT = 400;
     private SharedPreferences mSharedPreferences;
     private DatabaseReference PhotoOwnerRef;
+    private SharedPreferences.Editor mEditor;
     private DatabaseReference UserSavedPicturesRef;
     private DatabaseReference UserRef;
     private DatabaseReference mPhotosRef;
@@ -145,14 +147,16 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-
+        // navigating to and loading another persons Profile
         OwnerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (picture.getOwnerUid() == uid) {
+                if (picture.getOwnerUid().equals(uid)) {
                     Intent intent = new Intent(mContext, ProfileActivity.class);
                     mContext.startActivity(intent);
                 } else {
-                    Intent intent = new Intent(mContext, ProfileActivity.class);
+                    String PersonsProfile = picture.getOwnerUid();
+                    Intent intent = new Intent(mContext, OtherPersonsProfile.class);
+                    intent.putExtra(Constants.USER_UID, picture.getOwnerUid());
                     mContext.startActivity(intent);
                 }
             }
@@ -240,24 +244,23 @@ public class FirebaseAllPhotosViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-//        WhiteFlag.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v)
-//            {
-//                WhiteFlag.setVisibility(View.INVISIBLE);
-//                RedFlag.setVisibility(View.VISIBLE);
-//
-//            }
-//
-//        });
-//
-//        RedFlag.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v)
-//            {
-//                WhiteFlag.setVisibility(View.VISIBLE);
-//                RedFlag.setVisibility(View.INVISIBLE);
-//            }
-//
-//        });
+        WhiteFlag.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                WhiteFlag.setVisibility(View.INVISIBLE);
+                RedFlag.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+        RedFlag.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                WhiteFlag.setVisibility(View.VISIBLE);
+                RedFlag.setVisibility(View.INVISIBLE);
+            }
+
+        });
 
         //fonts and setting fonts
         Typeface typeface = Typeface.createFromAsset(PhotoComment.getContext().getAssets(), "fonts/Roboto-Regular.ttf");

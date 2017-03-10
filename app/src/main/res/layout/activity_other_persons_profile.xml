@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.example.guest.ghostydrop.OtherPersonsProfile">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/top_bar"
+        android:background="@color/colorAccent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/searchLogo"
+            app:srcCompat="@mipmap/search_white" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@mipmap/social_white"
+            android:id="@+id/profileLogoImageView"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_alignTop="@+id/searchLogo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="GhostDrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headerText"
+            android:textSize="38sp"
+            android:textColor="@color/colorWhite"
+            android:layout_alignTop="@+id/profileImageView"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:id="@+id/socialChunk"
+        android:visibility="invisible"
+        android:layout_below="@id/top_bar"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:id="@+id/profilePictureImageView"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text=""
+            android:layout_marginLeft="5dp"
+            android:textSize="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/displayNameTextView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:id="@+id/bioTextView"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:padding="3dp"
+            android:background="@drawable/blue_button_box"
+            android:textColor="@color/colorText"
+            android:layout_below="@+id/ageLayout"
+            android:layout_toLeftOf="@+id/profilePictureImageView"
+            android:layout_toStartOf="@+id/profilePictureImageView"
+            android:layout_alignBottom="@+id/profilePictureImageView" />
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:id="@+id/ageLayout"
+            android:layout_below="@+id/displayNameTextView"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_alignLeft="@+id/displayNameTextView"
+            android:layout_alignStart="@+id/displayNameTextView">
+
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ageTextView"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:id="@+id/were"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/socialChunk">
+
+        <TextView
+            android:text="Collected Photos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textSize="30dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView2"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/savedPictureRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+</RelativeLayout>
